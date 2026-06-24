@@ -24,7 +24,6 @@
             padding: 1rem 1.5rem 2rem;
         }
 
-        /* ===== MAGENTA HEADER – NEW PROFESSIONAL DESIGN ===== */
         .magenta-header {
             background: linear-gradient(145deg, #6d0040, #8f1a5e, #b32b7a);
             border-radius: 0 0 42px 42px;
@@ -76,34 +75,20 @@
             gap: 18px;
         }
 
-       .emblem-wrapper{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    overflow:hidden;
-    background:#fff;
-    padding:8px;
-    box-shadow:0 4px 15px rgba(0,0,0,.2);
-}
-
-.emblem{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-        .emblem-fallback {
-            width: 68px;
-            height: 68px;
-            background: #ffffff;
+        .emblem-wrapper {
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 42px;
-            font-weight: 700;
-            color: #6d0040;
-            box-shadow: inset 0 0 0 2px #d9a0c0;
+            overflow: hidden;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+        }
+
+        .emblem {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .header-titles {
@@ -167,7 +152,6 @@
             color: #f2c8de;
         }
 
-        /* ===== SEARCH CARD ===== */
         .search-card {
             background: white;
             border-radius: 2rem;
@@ -202,7 +186,8 @@
         }
 
         .filter-group select,
-        .filter-group input[type="text"] {
+        .filter-group input[type="text"],
+        .filter-group input[type="number"] {
             width: 100%;
             padding: 0.7rem 1rem;
             font-size: 0.9rem;
@@ -214,44 +199,46 @@
             cursor: pointer;
         }
 
-        .filter-group input[type="text"] {
+        .filter-group input[type="text"],
+        .filter-group input[type="number"] {
             cursor: text;
         }
 
         .filter-group select:focus,
-        .filter-group input[type="text"]:focus {
+        .filter-group input[type="text"]:focus,
+        .filter-group input[type="number"]:focus {
             outline: none;
             border-color: #b32b7a;
             box-shadow: 0 0 0 4px rgba(179, 43, 122, 0.15);
         }
 
         .checkbox-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 4 columns */
-    gap: 10px;
-    max-height: 250px;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fff;
-}
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+        }
 
-.checkbox-container label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    cursor: pointer;
-}
+        .checkbox-container label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
 
-.all-tables {
-    grid-column: 1 / -1; /* Full width row */
-    font-weight: bold;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 8px;
-}
+        .all-tables {
+            grid-column: 1 / -1;
+            font-weight: bold;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 8px;
+        }
 
         .filter-group .checkbox-container input[type="checkbox"] {
             width: 16px;
@@ -368,6 +355,23 @@
             background-color: #faf0f5;
         }
 
+        .village-link {
+            color: #7a1a5a;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #d9a0c0;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+
+        .village-link:hover {
+            color: #b32b7a;
+            border-bottom-color: #b32b7a;
+            background: #f5e8f0;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
         .no-results {
             text-align: center;
             padding: 3rem;
@@ -375,7 +379,6 @@
             font-style: italic;
         }
 
-        /* QUERY GRID – MAGENTA ACCENT */
         .query-grid-container {
             background: linear-gradient(145deg, #1a0a14, #2d1524);
             border-radius: 1.5rem;
@@ -508,6 +511,31 @@
             font-size: 0.9rem;
         }
 
+        .code-input-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.6rem;
+            align-items: flex-end;
+            background: #f8f0f5;
+            padding: 1rem 1.5rem;
+            border-radius: 2rem;
+            margin-top: 0.8rem;
+            border: 1px solid #ecd8e4;
+        }
+
+        .code-input-grid .filter-group {
+            flex: 1 1 140px;
+            min-width: 120px;
+        }
+
+        .code-input-grid .filter-group label {
+            font-size: 0.7rem;
+        }
+
+        .code-input-grid .filter-group input {
+            padding: 0.6rem 1rem;
+        }
+
         footer {
             background: #0f172a;
             color: #ffffff;
@@ -577,6 +605,11 @@
             }
             .checkbox-container {
                 max-height: 150px;
+                grid-template-columns: 1fr 1fr;
+            }
+            .code-input-grid {
+                flex-direction: column;
+                align-items: stretch;
             }
         }
     </style>
@@ -584,27 +617,27 @@
 <body>
 <div class="container">
 
-    <!-- ========== MAGENTA HEADER – PROFESSIONAL & ATTRACTIVE ========== -->
     <header class="magenta-header">
-    <div class="header-grid">
-        <div class="header-left">
-            <div class="emblem-wrapper">
-                <img src="logo2.png" class="emblem gov-logo" alt="Karnataka Government Emblem">
+        <div class="header-grid">
+            <div class="header-left">
+                <div class="emblem-wrapper">
+                    <img src="../assets/img/logo2.png" class="gov-logo mb-3" alt="Karnataka Government Emblem">
+                </div>
+                <div class="header-titles">
+                    <span class="gov-tag">Government of Karnataka</span>
+                    <span class="main-title">Deputy Commissioner Office</span>
+                    <span class="sub-title">Bidar · Revenue Department</span>
+                </div>
             </div>
-            <div class="header-titles">
-                <span class="gov-tag">Government of Karnataka</span>
-                <span class="main-title">Deputy Commissioner Office</span>
-                <span class="sub-title">Bidar · Revenue Department</span>
+            <div class="header-right">
+                <div class="dept">🏛️ District Administration</div>
+                <div class="location">Bidar <small>· Village Master Data</small></div>
             </div>
         </div>
-        <div class="header-right">
-            <div class="dept">🏛️ District Administration</div>
-            <div class="location">Bidar <small>· Village Master Data</small></div>
-        </div>
-    </div>
-</header>
-    <!-- ========== SEARCH CARD ========== -->
+    </header>
+
     <div class="search-card">
+        <!-- filters -->
         <div class="filter-grid">
             <div class="filter-group">
                 <label>🏷️ DISTRICT</label>
@@ -636,39 +669,48 @@
             </div>
         </div>
 
+        <!-- appl_no, tran_no, year_code -->
+        <div class="code-input-grid">
+            <div class="filter-group">
+                <label>📄 APPL NO</label>
+                <input type="text" id="applNoInput" placeholder="e.g. 123/2024" autocomplete="off">
+            </div>
+            <div class="filter-group">
+                <label>🔢 TRAN NO</label>
+                <input type="text" id="tranNoInput" placeholder="e.g. 45/2024" autocomplete="off">
+            </div>
+            <div class="filter-group">
+                <label>📅 YEAR CODE</label>
+                <input type="text" id="yearCodeInput" placeholder="e.g. 2024" autocomplete="off">
+            </div>
+        </div>
+
         <div class="filter-grid" style="margin-top: 1.2rem;">
             <div class="filter-group" style="flex: 1 1 280px; min-width: 220px;">
-    <label>📋 TABLE NAMES (Select Multiple)</label>
-
-    <div id="tableSelectContainer" class="checkbox-container">
-        <label class="all-tables">
-            <input type="checkbox" id="selectAllTables"> ✅ All Tables
-        </label>
-
-        <label><input type="checkbox" value="appl_mutation"> appl_mutation</label>
-        <label><input type="checkbox" value="appl_mutation_owners"> appl_mutation_owners</label>
-        <label><input type="checkbox" value="DS_ROR"> DS_ROR</label>
-        <label><input type="checkbox" value="DS_TC"> DS_TC</label>
-
-        <label><input type="checkbox" value="rtc_owner"> rtc_owner</label>
-        <label><input type="checkbox" value="rtc_cultiv"> rtc_cultiv</label>
-        <label><input type="checkbox" value="rtc_crop"> rtc_crop</label>
-        <label><input type="checkbox" value="rtc_head"> rtc_head</label>
-
-        <label><input type="checkbox" value="tr_mcultiv"> tr_mcultiv</label>
-        <label><input type="checkbox" value="tr_mnewown"> tr_mnewown</label>
-        <label><input type="checkbox" value="tr_mnewown_loan"> tr_mnewown_loan</label>
-        <label><input type="checkbox" value="tr_moldown"> tr_moldown</label>
-
-        <label><input type="checkbox" value="tr_mutation"> tr_mutation</label>
-        <label><input type="checkbox" value="tr_mutation_surveynos"> tr_mutation_surveynos</label>
-        <label><input type="checkbox" value="tr_objection"> tr_objection</label>
-        <label><input type="checkbox" value="tr_podi_owner"> tr_podi_owner</label>
-
-        <label><input type="checkbox" value="tr_podi_rtc"> tr_podi_rtc</label>
-         <label><input type="checkbox" value="DS_RTC"> DS_RTC</label>
-    </div>
-</div>
+                <label>📋 TABLE NAMES (Select Multiple)</label>
+                <div id="tableSelectContainer" class="checkbox-container">
+                    <label class="all-tables">
+                        <input type="checkbox" id="selectAllTables"> ✅ All Tables
+                    </label>
+                    <label><input type="checkbox" value="appl_mutation"> appl_mutation</label>
+                    <label><input type="checkbox" value="appl_mutation_owners"> appl_mutation_owners</label>
+                    <label><input type="checkbox" value="DS_ROR"> DS_ROR</label>
+                    <label><input type="checkbox" value="DS_RTC"> DS_RTC</label>
+                    <label><input type="checkbox" value="DS_TC"> DS_TC</label>
+                    <label><input type="checkbox" value="rtc_cultiv"> rtc_cultiv</label>
+                    <label><input type="checkbox" value="rtc_crop"> rtc_crop</label>
+                    <label><input type="checkbox" value="rtc_head"> rtc_head</label>
+                    <label><input type="checkbox" value="tr_mcultiv"> tr_mcultiv</label>
+                    <label><input type="checkbox" value="tr_mnewown"> tr_mnewown</label>
+                    <label><input type="checkbox" value="tr_mnewown_loan"> tr_mnewown_loan</label>
+                    <label><input type="checkbox" value="tr_moldown"> tr_moldown</label>
+                    <label><input type="checkbox" value="tr_mutation"> tr_mutation</label>
+                    <label><input type="checkbox" value="tr_mutation_surveynos"> tr_mutation_surveynos</label>
+                    <label><input type="checkbox" value="tr_objection"> tr_objection</label>
+                    <label><input type="checkbox" value="tr_podi_owner"> tr_podi_owner</label>
+                    <label><input type="checkbox" value="tr_podi_rtc"> tr_podi_rtc</label>
+                </div>
+            </div>
             <div class="action-buttons">
                 <button class="btn-clear" id="clearAllBtn">✖️ Reset</button>
                 <button class="btn-submit" id="submitBtn">▶ Generate Queries</button>
@@ -682,7 +724,6 @@
         </div>
     </div>
 
-    <!-- ========== TABLE ========== -->
     <div class="results-container">
         <table id="dataTable">
             <thead>
@@ -699,7 +740,6 @@
         </table>
     </div>
 
-    <!-- ========== QUERY GRID ========== -->
     <div class="query-grid-container">
         <div class="query-grid-header">
             <div class="title">
@@ -709,14 +749,14 @@
             <button class="copy-btn" id="copyAllBtn">📋 Copy All</button>
         </div>
         <div class="query-grid" id="queryGrid">
-            <div class="no-query">Select filters and click Generate Queries</div>
+            <div class="no-query">Select filters and click Generate Queries to create statements</div>
         </div>
     </div>
 
     <footer>
-        Copyright © 2025 Bhoomi Monitoring Cell All Rights Reserved. Government of Karnataka · Bidar District · Revenue Department · All Taluks, Hoblis & Villages Directory
+        Government of Karnataka · Bidar District · Revenue Department · All Taluks, Hoblis & Villages Directory
         <br><br>
-             Developed & Designed By :
+        Developed & Designed By :
         <a href="https://arvindbadagi.github.io/analytics/" target="_blank">Arvind Badagi</a>
     </footer>
 </div>
@@ -1420,6 +1460,7 @@
 
     // ===== Helpers =====
     function extractCode(str) {
+        if (!str) return null;
         const match = str.match(/\((\d+)\)/);
         return match ? parseInt(match[1], 10) : null;
     }
@@ -1457,6 +1498,10 @@
     const queryCount = document.getElementById('queryCount');
     const copyAllBtn = document.getElementById('copyAllBtn');
     const selectAllTables = document.getElementById('selectAllTables');
+
+    const applNoInput = document.getElementById('applNoInput');
+    const tranNoInput = document.getElementById('tranNoInput');
+    const yearCodeInput = document.getElementById('yearCodeInput');
 
     // ===== Populate functions =====
     function populateDistricts() {
@@ -1531,16 +1576,79 @@
         const fragment = document.createDocumentFragment();
         rows.forEach(row => {
             const tr = document.createElement('tr');
+            const villageName = escapeHtml(row[3]);
+            const villageCode = extractCode(row[3]);
+            const villageLink = `<a href="#" class="village-link" data-village="${escapeHtml(row[3])}" data-code="${villageCode !== null ? villageCode : ''}" data-dist="${escapeHtml(row[0])}" data-taluk="${escapeHtml(row[1])}" data-hobli="${escapeHtml(row[2])}">${villageName}</a>`;
             tr.innerHTML = `
                     <td>${escapeHtml(row[0])}</td>
                     <td>${escapeHtml(row[1])}</td>
                     <td>${escapeHtml(row[2])}</td>
-                    <td>${escapeHtml(row[3])}</td>
+                    <td>${villageLink}</td>
                 `;
             fragment.appendChild(tr);
         });
         tbody.innerHTML = '';
         tbody.appendChild(fragment);
+
+        // Attach click events to village links
+        document.querySelectorAll('.village-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const villageName = this.dataset.village;
+                const distName = this.dataset.dist;
+                const talukName = this.dataset.taluk;
+                const hobliName = this.dataset.hobli;
+
+                // Set dropdowns to match the clicked village's hierarchy
+                const districtSelect = document.getElementById('districtSelect');
+                const talukSelect = document.getElementById('talukSelect');
+                const hobliSelect = document.getElementById('hobliSelect');
+                const villageSelect = document.getElementById('villageSelect');
+
+                // Set district
+                for (let opt of districtSelect.options) {
+                    if (opt.value === distName) {
+                        districtSelect.value = distName;
+                        break;
+                    }
+                }
+                // Trigger taluk population
+                populateTaluks();
+                // Set taluk
+                for (let opt of talukSelect.options) {
+                    if (opt.value === talukName) {
+                        talukSelect.value = talukName;
+                        break;
+                    }
+                }
+                // Trigger hobli population
+                populateHoblis();
+                // Set hobli
+                for (let opt of hobliSelect.options) {
+                    if (opt.value === hobliName) {
+                        hobliSelect.value = hobliName;
+                        break;
+                    }
+                }
+                // Trigger village population
+                populateVillages();
+                // Set village
+                for (let opt of villageSelect.options) {
+                    if (opt.value === villageName) {
+                        villageSelect.value = villageName;
+                        break;
+                    }
+                }
+                // Set search field
+                document.getElementById('villageSearch').value = villageName;
+
+                // Trigger filters and query generation
+                applyFilters();
+                generateQueries();
+                // Scroll to queries
+                document.querySelector('.query-grid-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
     }
 
     // ===== All Tables checkbox =====
@@ -1570,6 +1678,9 @@
         hobliSelect.value = '';
         villageSelect.value = '';
         villageSearch.value = '';
+        applNoInput.value = '';
+        tranNoInput.value = '';
+        yearCodeInput.value = '';
 
         const checkboxes = document.querySelectorAll('#tableSelectContainer input[type="checkbox"]');
         checkboxes.forEach(cb => cb.checked = false);
@@ -1587,6 +1698,10 @@
         const talukVal = talukSelect.value;
         const hobliVal = hobliSelect.value;
         const villageVal = villageSelect.value;
+
+        const applNo = applNoInput.value.trim();
+        const tranNo = tranNoInput.value.trim();
+        const yearCode = yearCodeInput.value.trim();
 
         const checkedTables = Array.from(document.querySelectorAll('#tableSelectContainer input[type="checkbox"]:checked'))
             .filter(cb => cb.id !== 'selectAllTables')
@@ -1612,6 +1727,9 @@
         if (talukCode !== null) conditions.push(`taluk_code = ${talukCode}`);
         if (hobliCode !== null) conditions.push(`hobli_code = ${hobliCode}`);
         if (villageCode !== null) conditions.push(`village_code = ${villageCode}`);
+        if (applNo) conditions.push(`appl_no = '${applNo}'`);
+        if (tranNo) conditions.push(`tran_no = '${tranNo}'`);
+        if (yearCode) conditions.push(`year_code = '${yearCode}'`);
 
         if (checkedTables.length === 0) {
             queryGrid.innerHTML = `<div class="no-query">⚠️ Please select at least one table from the list</div>`;
@@ -1630,6 +1748,9 @@
                 if (talukCode !== null) condParts.push(`<span class="string">taluk_code</span> <span class="operator">=</span> <span class="number">${talukCode}</span>`);
                 if (hobliCode !== null) condParts.push(`<span class="string">hobli_code</span> <span class="operator">=</span> <span class="number">${hobliCode}</span>`);
                 if (villageCode !== null) condParts.push(`<span class="string">village_code</span> <span class="operator">=</span> <span class="number">${villageCode}</span>`);
+                if (applNo) condParts.push(`<span class="string">appl_no</span> <span class="operator">=</span> <span class="string">'${applNo}'</span>`);
+                if (tranNo) condParts.push(`<span class="string">tran_no</span> <span class="operator">=</span> <span class="string">'${tranNo}'</span>`);
+                if (yearCode) condParts.push(`<span class="string">year_code</span> <span class="operator">=</span> <span class="string">'${yearCode}'</span>`);
                 coloredQuery += condParts.join(` <span class="keyword">AND</span> `);
             }
             coloredQuery += ';';
