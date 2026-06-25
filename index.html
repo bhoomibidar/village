@@ -78,10 +78,21 @@
             border-radius: 50%;
             overflow: hidden;
             background: #fff;
-            padding: 8px;
+            padding: 6px;
             box-shadow: 0 4px 15px rgba(0,0,0,.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .emblem-fallback {
+        .emblem-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 50%;
+        }
+        /* fallback if image missing — show emblem text */
+        .emblem-wrapper .emblem-fallback {
             width: 100%;
             height: 100%;
             background: #f5e8f0;
@@ -92,6 +103,7 @@
             font-weight: 700;
             color: #6d0040;
             border-radius: 50%;
+            font-family: 'Segoe UI', sans-serif;
         }
         .header-titles {
             display: flex;
@@ -205,7 +217,7 @@
             margin-top: 0.8rem;
             border: 1px solid #ecd8e4;
         }
-        .code-input-grid .filter-group { flex: 1 1 140px; min-width: 120px; }
+        .code-input-grid .filter-group { flex: 1 1 130px; min-width: 110px; }
         .code-input-grid .filter-group label { font-size: 0.7rem; }
         .code-input-grid .filter-group input { padding: 0.6rem 1rem; }
 
@@ -551,8 +563,8 @@
         <div class="header-grid">
             <div class="header-left">
                 <div class="emblem-wrapper">
-    <img src="logo2.png" alt="Government Logo" class="header-logo">
-</div>
+                    <img src="logo2.png" alt="Government Logo" class="header-logo" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=\'emblem-fallback\'>🛡️</div>';">
+                </div>
                 <div class="header-titles">
                     <span class="gov-tag">Government of Karnataka</span>
                     <span class="main-title">Deputy Commissioner Office</span>
@@ -577,6 +589,7 @@
         <div class="code-input-grid">
             <div class="filter-group"><label>📄 APPL NO</label><input type="text" id="applNoInput" placeholder="e.g. 123/2024"></div>
             <div class="filter-group"><label>🔢 TRAN NO</label><input type="text" id="tranNoInput" placeholder="e.g. 45/2024"></div>
+            <div class="filter-group"><label>🗺️ LAND CODE</label><input type="text" id="landCodeInput" placeholder="e.g. LAND123"></div>
             <div class="filter-group"><label>📅 YEAR CODE</label><input type="text" id="yearCodeInput" placeholder="e.g. 2024"></div>
         </div>
 
@@ -1439,6 +1452,7 @@
     const copyAllBtn = document.getElementById('copyAllBtn');
     const applNoInput = document.getElementById('applNoInput');
     const tranNoInput = document.getElementById('tranNoInput');
+    const landCodeInput = document.getElementById('landCodeInput'); // NEW
     const yearCodeInput = document.getElementById('yearCodeInput');
 
     // populate
@@ -1521,7 +1535,7 @@
 
     function resetAllFilters() {
         districtSelect.value = ''; talukSelect.value = ''; hobliSelect.value = ''; villageSelect.value = ''; villageSearch.value = '';
-        applNoInput.value = ''; tranNoInput.value = ''; yearCodeInput.value = '';
+        applNoInput.value = ''; tranNoInput.value = ''; landCodeInput.value = ''; yearCodeInput.value = '';
         currentChecked.clear();
         document.querySelectorAll('#tableSelectContainer input[type="checkbox"]').forEach(cb => cb.checked = false);
         const sa = document.getElementById('selectAllTables'); if (sa) sa.checked = false;
@@ -1533,7 +1547,7 @@
 
     function generateQueries() {
         const d = districtSelect.value, t = talukSelect.value, h = hobliSelect.value, v = villageSelect.value;
-        const appl = applNoInput.value.trim(), tran = tranNoInput.value.trim(), year = yearCodeInput.value.trim();
+        const appl = applNoInput.value.trim(), tran = tranNoInput.value.trim(), land = landCodeInput.value.trim(), year = yearCodeInput.value.trim();
         
         // IMPORTANT: Read from currentChecked Set (preserves ALL selections across groups)
         const checked = Array.from(currentChecked);
@@ -1554,6 +1568,7 @@
         if (vc !== null) conds.push(`village_code = ${vc}`);
         if (appl) conds.push(`appl_no = '${appl}'`);
         if (tran) conds.push(`tran_no = '${tran}'`);
+        if (land) conds.push(`land_code = '${land}'`);  // NEW
         if (year) conds.push(`year_code = '${year}'`);
 
         if (!checked.length) {
@@ -1574,6 +1589,7 @@
                 if (vc !== null) parts.push(`<span class="string">village_code</span> <span class="operator">=</span> <span class="number">${vc}</span>`);
                 if (appl) parts.push(`<span class="string">appl_no</span> <span class="operator">=</span> <span class="string">'${appl}'</span>`);
                 if (tran) parts.push(`<span class="string">tran_no</span> <span class="operator">=</span> <span class="string">'${tran}'</span>`);
+                if (land) parts.push(`<span class="string">land_code</span> <span class="operator">=</span> <span class="string">'${land}'</span>`);
                 if (year) parts.push(`<span class="string">year_code</span> <span class="operator">=</span> <span class="string">'${year}'</span>`);
                 q += parts.join(` <span class="keyword">AND</span> `);
             }
