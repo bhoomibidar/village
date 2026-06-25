@@ -3,62 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Bidar District · Village Directory</title>
+    <title>Bidar District · Revenue Directory</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            background: #faf0f7;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            color: #2e1f2a;
+            background: #f6edf2;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            color: #1f1420;
             padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
-
+        img, iframe, .no-select { pointer-events: none; }
         .container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 1rem 1.5rem 2rem;
+            padding: 1rem 1.8rem 2.5rem;
         }
-
         .magenta-header {
-            background: linear-gradient(145deg, #6d0040, #8f1a5e, #b32b7a);
-            border-radius: 0 0 42px 42px;
+            background: linear-gradient(145deg, #5a0035, #871d5a, #b02b7a);
+            border-radius: 0 0 44px 44px;
             padding: 28px 32px 22px;
             margin-bottom: 38px;
-            box-shadow: 0 14px 30px rgba(128, 0, 64, 0.25);
+            box-shadow: 0 16px 34px rgba(128,0,64,0.25);
             border-bottom: 5px solid #ffb3d9;
             position: relative;
             overflow: hidden;
         }
-
         .magenta-header::after {
             content: '';
             position: absolute;
             top: -60%;
-            right: -10%;
-            width: 280px;
-            height: 280px;
-            background: rgba(255, 255, 255, 0.04);
+            right: -8%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.04);
             border-radius: 50%;
             pointer-events: none;
         }
-
         .magenta-header::before {
             content: '';
             position: absolute;
             bottom: -40%;
-            left: -5%;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 215, 0, 0.03);
+            left: -4%;
+            width: 240px;
+            height: 240px;
+            background: rgba(255,215,0,0.03);
             border-radius: 50%;
             pointer-events: none;
         }
-
         .header-grid {
             display: flex;
             align-items: center;
@@ -68,13 +67,11 @@
             position: relative;
             z-index: 2;
         }
-
         .header-left {
             display: flex;
             align-items: center;
             gap: 18px;
         }
-
         .emblem-wrapper {
             width: 90px;
             height: 90px;
@@ -82,20 +79,24 @@
             overflow: hidden;
             background: #fff;
             padding: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+            box-shadow: 0 4px 15px rgba(0,0,0,.2);
         }
-
-        .emblem {
+        .emblem-fallback {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            background: #f5e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 700;
+            color: #6d0040;
+            border-radius: 50%;
         }
-
         .header-titles {
             display: flex;
             flex-direction: column;
         }
-
         .header-titles .gov-tag {
             font-size: 12px;
             font-weight: 600;
@@ -104,16 +105,14 @@
             text-transform: uppercase;
             margin-bottom: 3px;
         }
-
         .header-titles .main-title {
             font-size: 30px;
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+            color: #fff;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.25);
             line-height: 1.15;
             letter-spacing: 1px;
         }
-
         .header-titles .sub-title {
             font-size: 20px;
             font-weight: 500;
@@ -121,58 +120,50 @@
             margin-top: 2px;
             letter-spacing: 0.5px;
         }
-
         .header-right {
             text-align: right;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 8px 24px 10px 24px;
+            background: rgba(255,255,255,0.08);
+            padding: 8px 26px 10px 26px;
             border-radius: 60px;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.15);
         }
-
         .header-right .dept {
             font-size: 15px;
             font-weight: 600;
             color: #ffcce6;
             letter-spacing: 0.8px;
         }
-
         .header-right .location {
             font-size: 22px;
             font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             letter-spacing: 1px;
             margin-top: 2px;
         }
-
         .header-right .location small {
             font-weight: 400;
             font-size: 16px;
             color: #f2c8de;
         }
-
         .search-card {
             background: white;
-            border-radius: 2rem;
-            box-shadow: 0 8px 24px rgba(128, 0, 64, 0.07);
-            padding: 1.6rem 2rem;
-            margin-bottom: 2rem;
+            border-radius: 2.2rem;
+            box-shadow: 0 8px 28px rgba(128,0,64,0.07);
+            padding: 1.8rem 2rem 1.2rem;
+            margin-bottom: 2.2rem;
             border: 1px solid #ecd8e4;
         }
-
         .filter-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem 1.6rem;
             align-items: flex-end;
         }
-
         .filter-group {
             flex: 1 1 170px;
             min-width: 150px;
         }
-
         .filter-group label {
             display: flex;
             align-items: center;
@@ -184,10 +175,8 @@
             color: #6d2a4a;
             margin-bottom: 5px;
         }
-
         .filter-group select,
-        .filter-group input[type="text"],
-        .filter-group input[type="number"] {
+        .filter-group input {
             width: 100%;
             padding: 0.7rem 1rem;
             font-size: 0.9rem;
@@ -196,321 +185,15 @@
             background: #fdfafc;
             font-family: inherit;
             transition: 0.2s;
-            cursor: pointer;
         }
-
-        .filter-group input[type="text"],
-        .filter-group input[type="number"] {
-            cursor: text;
-        }
-
+        .filter-group select { cursor: pointer; }
+        .filter-group input { cursor: text; }
         .filter-group select:focus,
-        .filter-group input[type="text"]:focus,
-        .filter-group input[type="number"]:focus {
+        .filter-group input:focus {
             outline: none;
             border-color: #b32b7a;
-            box-shadow: 0 0 0 4px rgba(179, 43, 122, 0.15);
+            box-shadow: 0 0 0 4px rgba(179,43,122,0.15);
         }
-
-        .checkbox-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            max-height: 250px;
-            overflow-y: auto;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fff;
-        }
-
-        .checkbox-container label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .all-tables {
-            grid-column: 1 / -1;
-            font-weight: bold;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 8px;
-        }
-
-        .filter-group .checkbox-container input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            padding: 0;
-            border: 1.5px solid #c09ab0;
-            cursor: pointer;
-            box-shadow: none;
-            border-radius: 3px;
-            accent-color: #7a2a5a;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 4px;
-        }
-
-        .btn-clear {
-            background: #f5e8f0;
-            border: 1px solid #dcc0d0;
-            padding: 0.65rem 1.6rem;
-            border-radius: 2.5rem;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #4a2a3a;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-
-        .btn-clear:hover {
-            background: #ecd8e4;
-            border-color: #c09ab0;
-            transform: scale(0.97);
-        }
-
-        .btn-submit {
-            background: linear-gradient(145deg, #7a1a5a, #a52a7a);
-            border: none;
-            padding: 0.65rem 1.8rem;
-            border-radius: 2.5rem;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: white;
-            cursor: pointer;
-            transition: 0.15s;
-            box-shadow: 0 4px 10px rgba(128, 0, 64, 0.2);
-        }
-
-        .btn-submit:hover {
-            transform: scale(0.97);
-            box-shadow: 0 6px 14px rgba(128, 0, 64, 0.3);
-            background: linear-gradient(145deg, #8a1a6a, #b82a8a);
-        }
-
-        .stats-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 1.2rem;
-            gap: 10px;
-            border-top: 2px dashed #ecd8e4;
-            padding-top: 1rem;
-        }
-
-        .stats-badge {
-            background: #f5e8f0;
-            padding: 0.4rem 1.4rem;
-            border-radius: 3rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #4a2a3a;
-            border: 1px solid #dcc0d0;
-        }
-
-        .results-container {
-            background: white;
-            border-radius: 2rem;
-            box-shadow: 0 8px 20px rgba(128, 0, 64, 0.04);
-            overflow-x: auto;
-            border: 1px solid #ecd8e4;
-            margin-bottom: 1.5rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            min-width: 640px;
-        }
-
-        th {
-            background: #f0dce8;
-            padding: 0.9rem 1.2rem;
-            text-align: left;
-            font-weight: 700;
-            color: #3a1a2a;
-            border-bottom: 2px solid #dcc0d0;
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
-
-        td {
-            padding: 0.75rem 1.2rem;
-            border-bottom: 1px solid #f0e8ec;
-            color: #2e1f2a;
-        }
-
-        tr:hover td {
-            background-color: #faf0f5;
-        }
-
-        .village-link {
-            color: #7a1a5a;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 2px solid #d9a0c0;
-            transition: 0.15s;
-            cursor: pointer;
-        }
-
-        .village-link:hover {
-            color: #b32b7a;
-            border-bottom-color: #b32b7a;
-            background: #f5e8f0;
-            padding: 0 4px;
-            border-radius: 4px;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 3rem;
-            color: #7a5a6a;
-            font-style: italic;
-        }
-
-        .query-grid-container {
-            background: linear-gradient(145deg, #1a0a14, #2d1524);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid #8f4a7a;
-            box-shadow: 0 8px 32px rgba(128, 0, 64, 0.25);
-            margin-top: 0.5rem;
-        }
-
-        .query-grid-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .query-grid-header .title {
-            color: #f2a0d0;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .query-grid-header .title .badge {
-            background: #8f2a6a;
-            color: white;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.65rem;
-        }
-
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #f2d0e8;
-            padding: 0.4rem 1.2rem;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 600;
-        }
-
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(0.97);
-        }
-
-        .copy-btn.copied {
-            background: #2a7a4a;
-            border-color: #4aaa6a;
-        }
-
-        .query-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.6rem;
-            max-height: 500px;
-            overflow-y: auto;
-            padding-right: 0.5rem;
-        }
-
-        .query-grid::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .query-grid::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-
-        .query-grid::-webkit-scrollbar-thumb {
-            background: #8f2a6a;
-            border-radius: 10px;
-        }
-
-        .query-item {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 0.8rem;
-            padding: 0.7rem 1rem;
-            border-left: 3px solid #b32b7a;
-            transition: 0.2s;
-            font-family: 'Courier New', monospace;
-            font-size: 0.78rem;
-            color: #e4d0e0;
-        }
-
-        .query-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-left-color: #f2a0d0;
-        }
-
-        .query-item .sql-text {
-            word-break: break-all;
-            line-height: 1.6;
-        }
-
-        .query-item .keyword {
-            color: #ff79c6;
-        }
-
-        .query-item .number {
-            color: #bd93f9;
-        }
-
-        .query-item .table-name {
-            color: #8be9fd;
-            font-weight: 600;
-        }
-
-        .query-item .operator {
-            color: #ff79c6;
-        }
-
-        .query-item .string {
-            color: #f1fa8c;
-        }
-
-        .no-query {
-            color: #b08aaa;
-            text-align: center;
-            padding: 2rem;
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-
         .code-input-grid {
             display: flex;
             flex-wrap: wrap;
@@ -522,107 +205,354 @@
             margin-top: 0.8rem;
             border: 1px solid #ecd8e4;
         }
+        .code-input-grid .filter-group { flex: 1 1 140px; min-width: 120px; }
+        .code-input-grid .filter-group label { font-size: 0.7rem; }
+        .code-input-grid .filter-group input { padding: 0.6rem 1rem; }
 
-        .code-input-grid .filter-group {
-            flex: 1 1 140px;
-            min-width: 120px;
+        .table-group-wrapper {
+            margin-top: 1.4rem;
+            border-top: 2px dashed #e4d0dc;
+            padding-top: 1.2rem;
         }
-
-        .code-input-grid .filter-group label {
+        .table-group-wrapper .group-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #4a2a3a;
+            letter-spacing: 0.6px;
+            margin: 0 0 0.6rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .table-group-wrapper .group-title span {
+            background: #f0dce8;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
             font-size: 0.7rem;
+            color: #4a1a30;
         }
-
-        .code-input-grid .filter-group input {
-            padding: 0.6rem 1rem;
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 18px;
+            background: #fcf7fa;
+            padding: 8px 16px;
+            border-radius: 40px;
+            border: 1px solid #e8d4e0;
+            margin-bottom: 12px;
         }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #3a1a2a;
+            cursor: pointer;
+        }
+        .radio-group input[type="radio"] {
+            accent-color: #7a2a5a;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .checkbox-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 6px 12px;
+            background: #fcf7fa;
+            padding: 14px 18px;
+            border-radius: 20px;
+            border: 1px solid #e8d4e0;
+            max-height: 280px;
+            overflow-y: auto;
+            transition: 0.2s;
+        }
+        .checkbox-container label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 6px;
+            transition: 0.1s;
+        }
+        .checkbox-container label:hover { background: #f0e4ec; }
+        .checkbox-container input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: #7a2a5a;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .all-tables {
+            grid-column: 1 / -1;
+            font-weight: 700;
+            padding: 6px 0 10px 0;
+            border-bottom: 2px solid #dcc0d0;
+            margin-bottom: 6px;
+            color: #3a1a2a;
+        }
+        .all-tables input[type="checkbox"] { width: 18px; height: 18px; }
 
+        .action-stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem 2rem;
+            margin-top: 1.6rem;
+            border-top: 2px solid #ecd8e4;
+            padding-top: 1.2rem;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn-clear {
+            background: #f5e8f0;
+            border: 1px solid #dcc0d0;
+            padding: 0.7rem 1.8rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #4a2a3a;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-clear:hover {
+            background: #ecd8e4;
+            border-color: #c09ab0;
+            transform: scale(0.97);
+        }
+        .btn-submit {
+            background: linear-gradient(145deg, #7a1a5a, #a52a7a);
+            border: none;
+            padding: 0.7rem 2rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 4px 12px rgba(128,0,64,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-submit:hover {
+            transform: scale(0.97);
+            box-shadow: 0 6px 18px rgba(128,0,64,0.3);
+            background: linear-gradient(145deg, #8a1a6a, #b82a8a);
+        }
+        .stats-badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+        }
+        .stats-badge {
+            background: #f5e8f0;
+            padding: 0.4rem 1.4rem;
+            border-radius: 3rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a2a3a;
+            border: 1px solid #dcc0d0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .results-container {
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 8px 20px rgba(128,0,64,0.04);
+            overflow-x: auto;
+            border: 1px solid #ecd8e4;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 640px;
+        }
+        th {
+            background: #f0dce8;
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            font-weight: 700;
+            color: #3a1a2a;
+            border-bottom: 2px solid #dcc0d0;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        td {
+            padding: 0.75rem 1.2rem;
+            border-bottom: 1px solid #f0e8ec;
+            color: #2e1f2a;
+        }
+        tr:hover td { background-color: #faf0f5; }
+        .village-link {
+            color: #7a1a5a;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #d9a0c0;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+        .village-link:hover {
+            color: #b32b7a;
+            border-bottom-color: #b32b7a;
+            background: #f5e8f0;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #7a5a6a;
+            font-style: italic;
+        }
+        .query-grid-container {
+            background: linear-gradient(145deg, #1a0a14, #2d1524);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #8f4a7a;
+            box-shadow: 0 8px 32px rgba(128,0,64,0.25);
+            margin-top: 0.5rem;
+        }
+        .query-grid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .query-grid-header .title {
+            color: #f2a0d0;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .query-grid-header .title .badge {
+            background: #8f2a6a;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+        }
+        .copy-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #f2d0e8;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 600;
+        }
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(0.97);
+        }
+        .copy-btn.copied {
+            background: #2a7a4a;
+            border-color: #4aaa6a;
+        }
+        .query-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.6rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+        .query-grid::-webkit-scrollbar { width: 6px; }
+        .query-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .query-grid::-webkit-scrollbar-thumb { background: #8f2a6a; border-radius: 10px; }
+        .query-item {
+            background: rgba(255,255,255,0.04);
+            border-radius: 0.8rem;
+            padding: 0.7rem 1rem;
+            border-left: 3px solid #b32b7a;
+            transition: 0.2s;
+            font-family: 'Courier New', monospace;
+            font-size: 0.78rem;
+            color: #e4d0e0;
+        }
+        .query-item:hover {
+            background: rgba(255,255,255,0.08);
+            border-left-color: #f2a0d0;
+        }
+        .query-item .sql-text { word-break: break-all; line-height: 1.6; }
+        .query-item .keyword { color: #ff79c6; }
+        .query-item .number { color: #bd93f9; }
+        .query-item .table-name { color: #8be9fd; font-weight: 600; }
+        .query-item .operator { color: #ff79c6; }
+        .query-item .string { color: #f1fa8c; }
+        .no-query {
+            color: #b08aaa;
+            text-align: center;
+            padding: 2rem;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
         footer {
             background: #0f172a;
-            color: #ffffff;
+            color: #fff;
             text-align: center;
             padding: 15px;
             font-size: 14px;
             margin-top: 20px;
             border-radius: 40px 40px 0 0;
         }
-
         footer a {
             color: #ffb3d9;
             text-decoration: none;
             font-weight: 600;
         }
-
-        footer a:hover {
-            text-decoration: underline;
-            color: #ffd9ee;
-        }
-
+        footer a:hover { text-decoration: underline; color: #ffd9ee; }
         @media (max-width: 780px) {
-            .header-grid {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .header-right {
-                text-align: left;
-                width: 100%;
-                border-radius: 30px;
-            }
-            .header-titles .main-title {
-                font-size: 24px;
-            }
-            .header-titles .sub-title {
-                font-size: 17px;
-            }
-            .emblem-wrapper {
-                width: 64px;
-                height: 64px;
-            }
-            .emblem-fallback {
-                width: 54px;
-                height: 54px;
-                font-size: 32px;
-            }
-            .search-card {
-                padding: 1rem 1rem;
-            }
-            .filter-grid {
-                flex-direction: column;
-                gap: 0.6rem;
-            }
-            .action-buttons {
-                justify-content: flex-start;
-                margin-top: 1rem;
-            }
-            .query-grid-container {
-                padding: 1rem;
-            }
-            .query-item {
-                font-size: 0.7rem;
-                padding: 0.6rem 0.8rem;
-            }
-            .query-grid {
-                max-height: 300px;
-            }
-            .checkbox-container {
-                max-height: 150px;
-                grid-template-columns: 1fr 1fr;
-            }
-            .code-input-grid {
-                flex-direction: column;
-                align-items: stretch;
-            }
+            .header-grid { flex-direction: column; align-items: flex-start; }
+            .header-right { text-align: left; width: 100%; border-radius: 30px; }
+            .header-titles .main-title { font-size: 24px; }
+            .header-titles .sub-title { font-size: 17px; }
+            .emblem-wrapper { width: 64px; height: 64px; }
+            .search-card { padding: 1rem; }
+            .filter-grid { flex-direction: column; gap: 0.6rem; }
+            .action-stats-row { flex-direction: column; align-items: stretch; }
+            .action-buttons { justify-content: flex-start; }
+            .query-grid-container { padding: 1rem; }
+            .query-item { font-size: 0.7rem; padding: 0.6rem 0.8rem; }
+            .query-grid { max-height: 300px; }
+            .checkbox-container { max-height: 200px; grid-template-columns: 1fr 1fr; }
+            .code-input-grid { flex-direction: column; align-items: stretch; }
+            .radio-group { gap: 4px 12px; }
         }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="appContainer">
 
     <header class="magenta-header">
         <div class="header-grid">
             <div class="header-left">
                 <div class="emblem-wrapper">
-                    <img src="../assets/img/logo2.png" class="gov-logo mb-3" alt="Karnataka Government Emblem">
-                </div>
+    <img src="logo2.png" alt="Government Logo" class="header-logo">
+</div>
                 <div class="header-titles">
                     <span class="gov-tag">Government of Karnataka</span>
                     <span class="main-title">Deputy Commissioner Office</span>
@@ -637,115 +567,59 @@
     </header>
 
     <div class="search-card">
-        <!-- filters -->
         <div class="filter-grid">
-            <div class="filter-group">
-                <label>🏷️ DISTRICT</label>
-                <select id="districtSelect">
-                    <option value="">All Districts</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>🏘️ TALUK</label>
-                <select id="talukSelect">
-                    <option value="">All Taluks</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>🗺️ HOBLI</label>
-                <select id="hobliSelect">
-                    <option value="">All Hoblis</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>📍 VILLAGE</label>
-                <select id="villageSelect">
-                    <option value="">All Villages</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>🔍 SEARCH</label>
-                <input type="text" id="villageSearch" placeholder="Type village name..." autocomplete="off">
-            </div>
+            <div class="filter-group"><label>🏷️ DISTRICT</label><select id="districtSelect"><option value="">All Districts</option></select></div>
+            <div class="filter-group"><label>🏘️ TALUK</label><select id="talukSelect"><option value="">All Taluks</option></select></div>
+            <div class="filter-group"><label>🗺️ HOBLI</label><select id="hobliSelect"><option value="">All Hoblis</option></select></div>
+            <div class="filter-group"><label>📍 VILLAGE</label><select id="villageSelect"><option value="">All Villages</option></select></div>
+            <div class="filter-group"><label>🔍 SEARCH</label><input type="text" id="villageSearch" placeholder="Type village name..." autocomplete="off"></div>
         </div>
-
-        <!-- appl_no, tran_no, year_code -->
         <div class="code-input-grid">
-            <div class="filter-group">
-                <label>📄 APPL NO</label>
-                <input type="text" id="applNoInput" placeholder="e.g. 123/2024" autocomplete="off">
+            <div class="filter-group"><label>📄 APPL NO</label><input type="text" id="applNoInput" placeholder="e.g. 123/2024"></div>
+            <div class="filter-group"><label>🔢 TRAN NO</label><input type="text" id="tranNoInput" placeholder="e.g. 45/2024"></div>
+            <div class="filter-group"><label>📅 YEAR CODE</label><input type="text" id="yearCodeInput" placeholder="e.g. 2024"></div>
+        </div>
+
+        <div class="table-group-wrapper">
+            <div class="group-title">
+                📋 TABLE NAMES <span>select multiple</span>
+                <span style="font-weight:400; font-size:0.75rem; color:#6d2a4a; margin-left:auto;">Group filter:</span>
             </div>
-            <div class="filter-group">
-                <label>🔢 TRAN NO</label>
-                <input type="text" id="tranNoInput" placeholder="e.g. 45/2024" autocomplete="off">
+            <div class="radio-group" id="tableGroupRadio">
+                <label><input type="radio" name="tableGroup" value="all" checked> All Tables</label>
+                <label><input type="radio" name="tableGroup" value="application"> Application Level</label>
+                <label><input type="radio" name="tableGroup" value="transaction"> Transaction Level</label>
+                <label><input type="radio" name="tableGroup" value="history"> History Tables</label>
+                <label><input type="radio" name="tableGroup" value="rtc"> RTC Tables</label>
+                <label><input type="radio" name="tableGroup" value="gsc"> GSC Tables</label>
             </div>
-            <div class="filter-group">
-                <label>📅 YEAR CODE</label>
-                <input type="text" id="yearCodeInput" placeholder="e.g. 2024" autocomplete="off">
+            <div id="tableSelectContainer" class="checkbox-container">
+                <!-- dynamically rendered -->
             </div>
         </div>
 
-        <div class="filter-grid" style="margin-top: 1.2rem;">
-            <div class="filter-group" style="flex: 1 1 280px; min-width: 220px;">
-                <label>📋 TABLE NAMES (Select Multiple)</label>
-                <div id="tableSelectContainer" class="checkbox-container">
-                    <label class="all-tables">
-                        <input type="checkbox" id="selectAllTables"> ✅ All Tables
-                    </label>
-                    <label><input type="checkbox" value="appl_mutation"> appl_mutation</label>
-                    <label><input type="checkbox" value="appl_mutation_owners"> appl_mutation_owners</label>
-                    <label><input type="checkbox" value="DS_ROR"> DS_ROR</label>
-                    <label><input type="checkbox" value="DS_RTC"> DS_RTC</label>
-                    <label><input type="checkbox" value="DS_TC"> DS_TC</label>
-                    <label><input type="checkbox" value="rtc_cultiv"> rtc_cultiv</label>
-                    <label><input type="checkbox" value="rtc_crop"> rtc_crop</label>
-                    <label><input type="checkbox" value="rtc_head"> rtc_head</label>
-                    <label><input type="checkbox" value="tr_mcultiv"> tr_mcultiv</label>
-                    <label><input type="checkbox" value="tr_mnewown"> tr_mnewown</label>
-                    <label><input type="checkbox" value="tr_mnewown_loan"> tr_mnewown_loan</label>
-                    <label><input type="checkbox" value="tr_moldown"> tr_moldown</label>
-                    <label><input type="checkbox" value="tr_mutation"> tr_mutation</label>
-                    <label><input type="checkbox" value="tr_mutation_surveynos"> tr_mutation_surveynos</label>
-                    <label><input type="checkbox" value="tr_objection"> tr_objection</label>
-                    <label><input type="checkbox" value="tr_podi_owner"> tr_podi_owner</label>
-                    <label><input type="checkbox" value="tr_podi_rtc"> tr_podi_rtc</label>
-                </div>
-            </div>
+        <div class="action-stats-row">
             <div class="action-buttons">
                 <button class="btn-clear" id="clearAllBtn">✖️ Reset</button>
                 <button class="btn-submit" id="submitBtn">▶ Generate Queries</button>
             </div>
-        </div>
-
-        <div class="stats-bar">
-            <div class="stats-badge">📋 Total villages: <span id="totalCount">0</span></div>
-            <div class="stats-badge">🔍 Showing: <span id="showCount">0</span> of <span id="totalCount2">0</span></div>
-            <div class="stats-badge" id="codeStats">📌 Codes: —</div>
+            <div class="stats-badge-group">
+                <div class="stats-badge">📋 Total villages: <span id="totalCount">0</span></div>
+                <div class="stats-badge">🔍 Showing: <span id="showCount">0</span> of <span id="totalCount2">0</span></div>
+                <div class="stats-badge" id="codeStats">📌 Codes: —</div>
+            </div>
         </div>
     </div>
 
     <div class="results-container">
-        <table id="dataTable">
-            <thead>
-            <tr>
-                <th>District</th>
-                <th>Taluk</th>
-                <th>Hobli</th>
-                <th>Village Name</th>
-            </tr>
-            </thead>
-            <tbody id="tableBody">
-            <tr><td colspan="4" class="no-results">Loading administrative directory…</td></tr>
-            </tbody>
+        <table><thead><tr><th>District</th><th>Taluk</th><th>Hobli</th><th>Village Name</th></tr></thead>
+            <tbody id="tableBody"><tr><td colspan="4" class="no-results">Loading administrative directory…</td></tr></tbody>
         </table>
     </div>
 
     <div class="query-grid-container">
         <div class="query-grid-header">
-            <div class="title">
-                📄 SELECT QUERIES
-                <span class="badge" id="queryCount">0</span>
-            </div>
+            <div class="title">📄 SELECT QUERIES <span class="badge" id="queryCount">0</span></div>
             <button class="copy-btn" id="copyAllBtn">📋 Copy All</button>
         </div>
         <div class="query-grid" id="queryGrid">
@@ -762,726 +636,792 @@
 </div>
 
 <script>
-    // ================================================================
-    // COMPLETE DATASET – ALL 8 TALUKS
-    // ================================================================
-    const rawRowsOriginal = [
-        // BASAVAKALYAN TALUK
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "BASAVAKALYANA (1)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "YADALAPURA (2)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "SHIVAPURA (3)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "TRIPURANKA (4)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "TALABOGA (5)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "PRATAPURA (6)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "MORAKHANDI (7)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "GOWRA (8)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "JANAPURA (9)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "GOKULA (10)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "KITTA (11)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "DHANNURA K (12)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "KHANDALA (13)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "KHANAPURA K (14)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "NEELAKANTA (15)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "LAHESHVARA (16)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "NARAYANAPURA (17)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "BASAVAKALYANA (1)", "BETABALAKUNDA (18)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "MANTALA (1)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "ILYALA (2)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "GUNDURA (3)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "ALAGUDA (4)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "VATTARAGA (5)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "HIPPARAGA GHATA (6)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "HONNALLI (7)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "CHITTA KALLADEVA (8)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "URKI (9)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "MANNALLI (10)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "KAMALELUDI (11)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "ATALAPURA (12)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "SASTAPURA (13)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "HANDRIYALA RU (14)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "JAJANAMUGALI (15)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "GHOTALA (16)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "RAMATIRTHAKH (17)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "UMAPURA (18)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "HALLI (19)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "CHANDAKAPURA (20)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MANTALA (2)", "MIRJAPURA (21)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "RAJESHVARA (1)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "RAJOLA (2)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "ISLAMPURA (3)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "HANDRALAKE (4)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "LINGADALLI (5)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "NEERAGUDI (6)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "KOWDIYALA  S (7)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "ROLA (8)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "KOWDIYALARU (9)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "KHERDABH (10)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "SADALAPURA (11)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "DHANNURARU (12)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "PANDARAGERA (13)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "YARANDI (14)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "MANGALURA (15)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "YARABAGA (16)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "TADOLA (17)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "RAJESHVARA (3)", "GHOGGA (18)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "MUDABI (1)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "KHANAPURA BH (2)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "BAGADHURI (3)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "HATYALA (4)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "HARAKUDA (5)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "SARAJAVALAGA (6)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "JANAVADA (7)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "HIPPARAGA BH (8)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "MAISALAGA (9)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "KALAKHORA (10)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "HIRANAGANVA (11)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "SUNGATANA (12)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "EKALURA (13)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "GADALEGANVA BH (14)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "YALAVANTI (15)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "KHERDA KH (16)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "CHIKANAGANVA (17)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "SIRAGAPURA (18)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "KINNI (19)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "YADALAGUNDI (20)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "SAIDAPURA (21)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "MUDABI (4)", "HAMUNAGARA (22)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "KOHINURA (1)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "LADAVANTI (2)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "EKKAMBA (3)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "DHAMURI (4)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "UJALAMBA (5)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "CHITTAKOTA (6)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "BHAKANALA (7)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "BETAGERA (8)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "GADALEGANVA (9)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "SIRAGURA (10)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "RAMATIRTHAD (11)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "GILIGILI (12)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "HATTARAGA S (13)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "CHITTAKOTAK (14)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "BHOSAGA (15)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "MANAKHEDA (16)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "ATTURA (17)"],
-        ["BIDAR (5)", "BASAVAKALYAN (1)", "KOHINURA (5)", "SIRURI (18)"],
-
-        // BHALKI TALUK
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "BHALKI (1)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "BAJULAGA (2)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "KORURA (3)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "KARADIYALA (4)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "KADALABADA (5)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "GUBYALA (6)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "DHARAJAVADI (8)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "TALAVADA KH (9)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "SAIDAPURAVADI (10)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "JOLADABAKA (11)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "SIDDESHVARA (12)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "MARURA (13)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "CHIKALACHANDA (14)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "KUNTESHIRSHI (15)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "MADAKATTI (16)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "KALAVADI (17)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "HARANALA (18)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "DADAGI (19)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "RAMATIRTHAVADI (20)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "EKALASAPURAVADI (21)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "GORACHINCHOLI (22)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "NIDEBAN (23)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "ANANDAVADI (24)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "KOTAGERA (25)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "KOTAGYALAVADI (26)"],
-        ["BIDAR (5)", "BHALKI (2)", "BHALKI (1)", "GANESHAPURAVADI (27)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "SAYAGANVA (1)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "KHUDAVANDAPURA (2)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "INCHURA (3)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "KESARA JAVALAGA (4)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "SHREEMALI (5)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "JAMAKHANDI (6)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "VANJARAKHEDA (7)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "KONGALI (8)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "RU GOWNDAGANVA (9)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "KUNTEGANVA (10)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "LADA (11)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "HALASI L (12)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "JEERAGYALA (13)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "VAGALAGANVA (14)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "GUNJARAGA (15)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "ATTARAGA (16)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "ALAVAYI (17)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "NARADASANGAMA (18)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "MEHAKARA (19)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "MANIKESHVARA (20)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "TUGANVA H (21)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "BOLEGANVA (22)"],
-        ["BIDAR (5)", "BHALKI (2)", "SAYAGANVA (2)", "ELAMAVADI (23)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "NITTURA BH (1)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "AMBESANGAVI (2)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "HAJANALA (3)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "GORANALA (4)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "BEERIKH (5)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "NAGARALA (6)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "MURALA (7)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "KUDLI (8)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "HUPALA (9)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "KERURA (10)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "AHMADABADA (11)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "JAINAPURA (12)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "BALURA (13)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "KOTAGYALA (14)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "CHANDAPURA (15)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "KHASHAMAPURA (16)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "DONGARAGI (17)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "VALASANGA (18)"],
-        ["BIDAR (5)", "BHALKI (2)", "NITTURABH (3)", "SIDDAPURA VADI (19)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "KHATAKA CHINCHOLI (1)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "UCHYA (2)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "BYALAHALLI W (3)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "VARAVATTI (4)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "DAVARAGANVA (6)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "TUGANVACH (7)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "NELVADA (8)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "MORAMBI (9)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "HONNALLI (10)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "HALAGORTA (11)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "CHALAKAPURA (12)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "NAVADAGI (13)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "KAPALAPURA (14)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "MAVINAHALLI (15)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "ENAKURA (16)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "BARADAPURA (17)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "KURABA KHELAGI (18)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "MASHIMADU (19)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "CHITTA (20)"],
-        ["BIDAR (5)", "BHALKI (2)", "KHATAKA CHINCHULI (4)", "SIKINDRABADA VADI (21)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "LAKHANAGANVA (1)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "ALANDI (2)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "KALASADALA (3)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "HACHCHIKAMATA (4)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "DONAGAPURA (5)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "KAKANALA (6)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "METIMELAKUNDA (7)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "BHATAMBRA (8)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "BEERIBH (9)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "HUNAJIA (10)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "LANJAVADA (12)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "BHATASANGAVI (13)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "SHIVANI (14)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "TALAVADAM (15)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "TELAGANVA (16)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "SOMAPURA (17)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "ATANURA (18)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "KALASARATUGANVA (19)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "JAYAGANVA (20)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "TAMAGYALA (21)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "SHAMASHERAPURA (22)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "METIMELAKUNDA VADI (25)"],
-        ["BIDAR (5)", "BHALKI (2)", "LAKHANAGANVA (5)", "KASARATUGANVA VADI (26)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "HALABARGA (1)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "KANAJI (2)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "TEGAMPURA (3)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "HALAHIPPARAGA (4)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "KOSAMA (5)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "NAGURAKE (6)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "ALIYABADA (7)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "TARANALLI (8)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "HUNAJEE K (9)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "GODIHIPPARGA (10)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "DHANNURAH (11)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "KONAMELAKUNDA (12)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "KHANAPURA (13)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "RUDANURA (14)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "MALACHAPURA (15)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "JANTI (16)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "NELAGI (17)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "BYALAHALLIKH (18)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "KAMALAPURA (19)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "NIRAMANAHALLI (20)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "SEVANAGARA (21)"],
-        ["BIDAR (5)", "BHALKI (2)", "HALABARGA (6)", "HALAHALLI K (22)"],
-
-        // AURAD TALUK
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "OWRADABI (1)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "MAMADAPURA (2)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "NARAYANAPURA (3)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "GANESHAPURE (4)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "ALLAPURA (5)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "NARASINHAPURA (6)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "EKALARA (7)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "TULAJAPURA (8)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "BORALA (9)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "BADALAGANVA (10)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "DUDUKANALA (11)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "VANAMARAPALLI (12)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "MUNGANALA (13)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "KAPPIKERI (14)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "HASSIKERI (15)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "KHANDIKERI (16)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "HULLYALA (17)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "EKAMBA (18)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "JAMALAPURA (19)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "KOLLURA (20)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "JONNIKERI (21)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "MAHADONAGANVA (22)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "TEGAMPURA (23)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "GOWNDAGANVA (24)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "BONTI (26)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "HANGARAGABI (27)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "HOKRANA (28)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "KHERDABI (29)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "KARAKYALA (30)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "DONGARAGAVA (31)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "BANDARA KUMATA (32)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "LINGI (33)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "BAVALAGANVA (34)"],
-        ["BIDAR (5)", "AURAD (3)", "OWRADABI (1)", "SAVARAGANVA (35)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "CHINTAKI (1)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "BELDALA (2)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "JOJANA (3)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "NAGURAN (4)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "LINGADALSHIKH (5)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "KARANJIBI (6)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "KARANJIKE (7)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "MANURAKE (8)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "RAYAPALLI (9)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "NAGANAPALLI (10)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "LINGADALLI J (11)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "SUNDALA (12)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "KHASEMPURAA (13)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "UJANI (14)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "SUNKANALA (15)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "GUDAPALLI (16)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "NAGAMARAPALLI (17)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "NANDYALA (18)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "JAKANALA (19)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "ITAGYALA (20)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "ENAGUNDA (21)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "MEDAPALLI (22)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "NAGUREM (23)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "CHIKLIJE (24)"],
-        ["BIDAR (5)", "AURAD (3)", "CHINTAKI (2)", "BARADAPURA (25)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "SANTAPURA (1)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "JIRGABI (2)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "JEERGAKE (3)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "JAMBAGI (4)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "MAHARAJAVADI (5)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "SHEMBELLI (6)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "CHATANALA (7)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "GADIKUSANURA (8)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "PASHAPURA (9)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "BALURAJE (10)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "KOWTABI (11)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "KOWTAKE (12)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "BELUREN (13)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "VALLEPURA (14)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "ALURAKE (15)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "SORALLI (16)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "KOWDAGANVA (17)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "ALURABI (18)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "MUSTAPURA (19)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "BORGIJE (20)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "KANDAGULA (22)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "KHANAPURA (23)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "VADAGANVAD (24)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "KHASEMPURA B (25)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "RAKSHSHALA K (26)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "MASKALA (27)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "NAGURA B (28)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "BELAKONI CHOWDARI (29)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "RAKSHYALA B (30)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "DUPATAMAHAGANVA (31)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "MANIGEMPURA (32)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "LADHA (33)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "BACHEPALLI (34)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "BABALI (35)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "HEDAGAPURA (36)"],
-        ["BIDAR (5)", "AURAD (3)", "SANTAPURA (3)", "NITDORA K (37)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "RAKSHSHALA K (2)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "MASKALA (3)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "NAGURA B (4)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "BELAKONI CHOWDARI (5)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "RAKSHYALA B (6)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "DUPATAMAHAGANVA (10)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "MANIGEMPURA (11)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "LADHA (14)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "BACHEPALLI (15)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "BABALI (16)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "HEDAGAPURA (17)"],
-        ["BIDAR (5)", "AURAD (3)", "TANAKUSANURA (4)", "NITDORA K (18)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "BONTI (4)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "HANGARAGABI (5)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "HOKRANA (6)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "KHERDABI (7)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "KARAKYALA (8)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "DONGARAGAVA (9)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "BANDARA KUMATA (14)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "LINGI (15)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "BAVALAGANVA (20)"],
-        ["BIDAR (5)", "AURAD (3)", "DABAKA (6)", "SAVARAGANVA (21)"],
-
-        // BIDAR TALUK
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "CHILLARGI (1)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "CHIMAKODA (2)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "KHAJAPURA (3)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "BASANTAPURA (4)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "KANGATI (5)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "FATTEPURACH (6)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "KAPALAPURAJH (7)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "JAMPADA (8)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "AMADALAPADA (9)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "ALAMASAPURA (10)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "RASULABADA (11)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "MALEGANVA (12)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "NANDAGANVA (13)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "MIRAJAPURAKH (14)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "GADAGI (15)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "HAMILAPURA (16)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "CHIKKAPETA (17)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "NAVADAGERI (18)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "GUMMA (19)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "SHAMARAJAPURA (20)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "SOLAPURA (21)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "SIPPALAGERA (22)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "MAMANAKERI (23)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "KABEERAVADA (24)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "TAJALAPURA (25)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "ODAVADA (26)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "ALIYABADA (27)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "IMAMABADA (28)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "FATTEPURAJH (29)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "SHERIHUSENI (30)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "BAVAPURA (31)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "DATTANAKERI (32)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "ALANKERI (33)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "KHILLARKA (34)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "SULTANAPURAKH (35)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARA UTTARA (1)", "BAGE KARANJA (36)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "ASHTURA (1)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "MIRAJAPURAT (2)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "MALKAPURA (3)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "SULTANAPURAJH (4)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "HALADAKERI KH (5)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "MAILURA (6)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "KUMBARAVADA (7)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "AMALAPURA (8)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "GORANALLI BH (9)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "CHITTA (10)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "GUNNALLI (11)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "SHAHAPURA (12)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "HALADAKERI JH (13)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "BRAHMAPURA (14)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "BAGEHAMAMA (15)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "SHERICHAMPA (16)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "GULLARAHAVEELI (17)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "JANGALAKOYI (18)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "BAGEIBRAHIMA (19)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "MAILATEGAIRABI (20)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "BAGE-KHARIDI (21)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "MAILATEGORANALLI (22)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "BAGE-SHAHI (23)"],
-        ["BIDAR (5)", "BIDAR (4)", "BEEDARADAKSHINA (2)", "BAGEGORANALLI (24)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "MANNALLI (1)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "HOKRANABH (2)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "HOKRANAKH (3)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "NAGORA (4)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "GHODEPALLI (5)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "BUDHERA (6)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "T MIRJAPURA (7)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "CHINTALAGERA (8)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "DHARMAPURA (9)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "GOWSAPURA (10)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "YAKATAPURA (11)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "SATOLI (12)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "BARURA (13)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "RAJAGIRA (14)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "SINDHOLA (15)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "REKULAGI (16)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "TADAPALLI (17)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "BAMBALAGI (18)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "MARAKUNDA (19)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "BHANGURA (20)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "MUGADALA (21)"],
-        ["BIDAR (5)", "BIDAR (4)", "MANNALLI (3)", "BAPURA (22)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "BAGADALA (1)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "OWRADES (2)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "SIRASI A (3)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "HONNADDI (4)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "SHEKHAPURA (5)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "PATARAPALLI (6)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "BHAIRANALLI CH (7)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "KHASHEMPURACH (8)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "BAVAGI (9)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "NELAVADA (10)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "KHASHEMPURAP (11)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "MALIKA MEERJAPURA (12)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "MANDAKANALLI (13)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "KANGANAKOTA (14)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "KADAVADA (15)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "SHEMASHANAGARA (16)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "CHATNALLI (17)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "BARIDABADA (18)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "SANGOLAGI (19)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "RANJOLA  KHENI (20)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "NIDAVANCHA (21)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "SIRAKATANALLI (22)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "HOCHAKANALLI (23)"],
-        ["BIDAR (5)", "BIDAR (4)", "BAGADALA (4)", "HAJJARAGI (24)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "KAMATANA (1)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "SIKINDRAPURA (2)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "KHADARANAGARA (3)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "BAKACHOWDI (4)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "NIJAMAPURA (5)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "BELLURA (6)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "JAMISTANAPURA (7)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "YADLAPURA (8)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "KUTTABADA (9)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "AYASAPURA (10)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "NOWBADA (11)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "CHONDI (12)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "CHOWLI (13)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "KOLARAKE (14)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "CHIDRI (15)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "KOLARABI (16)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "ANADURA (17)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "KAPALAPURAA (18)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "ATIVALA (19)"],
-        ["BIDAR (5)", "BIDAR (4)", "KAMATANA (5)", "HONNIKERI (20)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "JANAVADA (1)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "KHANAJAMALAPURA (2)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "ALIYAMBARA (3)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "MAMADAPURA (4)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "YARANALLIPI (5)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "YARANALLIDI (6)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "BAMPALLI (7)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "ISLAMPURA (8)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "MARAKHALA (9)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "BENAKANALLI (10)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "DADDAPURA (11)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "SHREEMANDALA (12)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "NEMATABADA (13)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "NAVALASAPURA (14)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "CHAMBOLA (15)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "HIPPALAGANVA (16)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "KANNALLI (17)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "ALLAPURA (18)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "RAJANALA (19)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "SIDDAPURA (20)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "SANGAVI (21)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "VILASAPURA (22)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "BHAIRANALLIDI (23)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "GUMATAPURA (24)"],
-        ["BIDAR (5)", "BIDAR (4)", "JANAVADA (6)", "IMAMAPURA (25)"],
-
-        // HUMNABAD TALUK
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "HUMANABADA (1)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "DHUMMANASURA (2)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "HUDAGI (3)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "GADAVANTI (4)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "MANIKANAGARA (5)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "MOLAKERA (6)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "HANAKUNI (7)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "BORAMPALLI (8)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "KAPPARAGANVA (9)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "NANDAGANVA (10)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "HALLIKHEDAKE (11)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "MUSTAPURA (12)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "CHITAKOTA (13)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "KALLURA (14)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "KATALLI (15)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HUMANABADA (1)", "SINDHANAKERA (16)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "HALLILIKHEDABI (1)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "SINDABANDAGI (2)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "ATIVALA (3)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "NAMADAPURA (4)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "BENACHINCHOLI (5)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "KABEERABADA (6)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "MADARAGANVA (7)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "MALKAPURA VADI (8)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "DAKULAGI (9)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "AMIRABADA (10)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "ALLURA (11)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "BOTAGI (12)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "MARAKHALA (13)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "HILALAPURA (14)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "SHAKKARAGANJA (15)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "SITALAGERA (16)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "HALLILIKHEDABI (2)", "NIMBURA (17)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "DUBALAGUNDI (1)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "GHODAVADI (2)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "GHATABORALA (3)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "HUNASAGERA (4)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "KANAKATTA (5)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "HUNASANALA (6)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "SEDOLA (7)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "JALASINGI (8)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "KUMARA CHINCHOLI (9)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "HANDIKERA (10)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "VARAVATTIKE (11)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "OTAGI (12)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "SULTANABADA (13)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "CHEENAKERA (14)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "MUGANURA (15)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "CHANDANAHALLI (16)"],
-        ["BIDAR (5)", "HUMNABAD (5)", "DUBALAGUNDI (3)", "SONAKERA (17)"],
-
-        // CHITAGUPPA TALUK
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "CHITAGUPPA (1)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "MUSTARI (2)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "GURUDALA (3)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "KODAMBALA (4)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "BELAKERA (5)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "VALAKHINDI (6)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "RAMAPURA (7)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "TALAMADAGI (8)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "HIPPARGA (9)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "MUDANALA (10)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "ITAGA (11)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "SHAMATABADA (12)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "KANDAGOLA (13)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "VADDANAKERA (14)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "MADAGOLA (15)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "CHITAGUPPA (4)", "BHASKARA NAGARA (16)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "NIRNA (1)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "MADARAGI (2)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "BHADRAPURA (3)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "BASHEERAPURA (4)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "DEVAGEERI (5)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "MUTTANGI (6)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "ALIPURA (7)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "UDABALA (8)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "BANNALLI (9)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "MANGALAGI (10)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "NIRNA (5)", "NAGANAKERA (11)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "BEMALAKHEDA (1)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "UDAMANALLI (2)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "POLAKAPALLI (3)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "KARAPAPALLI (4)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "KARAKANALLI (5)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "SAIDAPURA (6)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "MEENAKERA (7)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "BORALA (8)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "MANNAEKHELLI (9)"],
-        ["BIDAR (5)", "CHITAGUPPA (6)", "BEMALAKHEDA (6)", "CHANGALERA (10)"],
-
-        // KAMALANAGARA TALUK
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "TANAKUSANURA (1)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "BALATA B (7)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "BALATA K (8)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "CHANDORI (9)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "BEDAKUNDA (12)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "HIPPALAGANVA (13)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "NIDODA (19)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "HALAHALLI (20)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "KOREKALA (21)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "BEMBRA (22)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "LINGADALLIYU (23)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "MUDHOLABI (24)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "MUDHOLA K (25)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "TANAKUSANURA (4)", "SANGAMA (26)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "KAMALANAGARA (1)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "TORANA (2)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "DONAGANVA M (3)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "BAVANIBIJALAGANVA (4)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "SAVALI (5)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "BELAKUNIBHO (6)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "SONALA (7)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "HORANDI (8)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "BALURA K (9)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "MADANURA (10)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "MURGAKE (11)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "CHANDESHVARA (12)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "KHEDA (13)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "KHATAGANVA (14)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "RANDYALA (15)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "KALAGAPURA (16)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "HULASURAKHEDA (17)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "DIGGI (18)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "KOTAGYALA (19)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "RAMAPURA (20)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "TAPASHYALA (21)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "BASANALA (22)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "KORIYALA (23)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "HAKYALA (24)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "KAMALANAGARA (5)", "HOLA SAMUDRA (25)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "DABAKA (1)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "VAGANAGERA (2)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "AKANAPURA (3)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "MALEGANVA (10)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "MUTAKHEDA (11)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "CHONDIMUKHEDA (12)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "NANDIBIJALAGANVA (13)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "CHIMEGANVA (16)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "HANDIKERA (17)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "CHIKALI U (18)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "GANESHAPURAYU (19)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "SANGANALA (22)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "DAREGANVA (23)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "MURKI (24)"],
-        ["BIDAR (5)", "KAMALANAGARA (7)", "DABAKA (6)", "GANGANABEEDA (25)"],
-
-        // HULASURA TALUK
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "HULASURA (1)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "SOLADABAKA (2)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "TOGALURA (3)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "KADARABADA (4)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "DEVANALA (5)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "HALAHALLI (6)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "MACHANALA (7)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "GADIGOWNDAGANVA (8)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "MIRKALA (9)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "GUTTI (10)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "BELURA (11)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "GORTABH (12)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "MACHALAMBA (13)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "GADIRAYAPALLI (14)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "KADEPURA (15)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "LIMBAPURA (16)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "MUSTAPURA (17)"],
-        ["BIDAR (5)", "HULASURA (8)", "HULASURA (6)", "KOTAMALA (18)"]
-    ];
-
-    // ===== Taluk numbering correction =====
-    const talukMap = {
-        "BASAVAKALYAN (1)": "BASAVAKALYAN (3)",
-        "BHALKI (2)": "BHALKI (2)",
-        "AURAD (3)": "AURAD (4)",
-        "BIDAR (4)": "BIDAR (1)",
-        "HUMNABAD (5)": "HUMNABAD (6)",
-        "CHITAGUPPA (6)": "CHITAGUPPA (5)",
-        "KAMALANAGARA (7)": "KAMALANAGARA (4)",
-        "HULASURA (8)": "HULASURA (3)"
-    };
-
-    const rawRows = rawRowsOriginal.map(row => {
-        const taluk = row[1];
-        const newTaluk = talukMap[taluk] || taluk;
-        return [row[0], newTaluk, row[2], row[3]];
+    // ----- DISABLE RIGHT CLICK & KEYBOARD SHORTCUTS (security) -----
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
+            (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C'))) {
+            e.preventDefault();
+            return false;
+        }
     });
 
-    // ===== Helpers =====
-    function extractCode(str) {
-        if (!str) return null;
-        const match = str.match(/\((\d+)\)/);
-        return match ? parseInt(match[1], 10) : null;
-    }
+    // ================================================================
+    // DATASET – all 8 taluks
+    // ================================================================
+    const rawRowsOriginal = [
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","BASAVAKALYANA (1)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","YADALAPURA (2)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","SHIVAPURA (3)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","TRIPURANKA (4)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","TALABOGA (5)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","PRATAPURA (6)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","MORAKHANDI (7)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","GOWRA (8)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","JANAPURA (9)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","GOKULA (10)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","KITTA (11)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","DHANNURA K (12)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","KHANDALA (13)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","KHANAPURA K (14)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","NEELAKANTA (15)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","LAHESHVARA (16)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","NARAYANAPURA (17)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","BASAVAKALYANA (1)","BETABALAKUNDA (18)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","MANTALA (1)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","ILYALA (2)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","GUNDURA (3)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","ALAGUDA (4)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","VATTARAGA (5)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","HIPPARAGA GHATA (6)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","HONNALLI (7)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","CHITTA KALLADEVA (8)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","URKI (9)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","MANNALLI (10)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","KAMALELUDI (11)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","ATALAPURA (12)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","SASTAPURA (13)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","HANDRIYALA RU (14)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","JAJANAMUGALI (15)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","GHOTALA (16)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","RAMATIRTHAKH (17)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","UMAPURA (18)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","HALLI (19)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","CHANDAKAPURA (20)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MANTALA (2)","MIRJAPURA (21)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","RAJESHVARA (1)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","RAJOLA (2)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","ISLAMPURA (3)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","HANDRALAKE (4)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","LINGADALLI (5)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","NEERAGUDI (6)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","KOWDIYALA  S (7)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","ROLA (8)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","KOWDIYALARU (9)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","KHERDABH (10)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","SADALAPURA (11)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","DHANNURARU (12)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","PANDARAGERA (13)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","YARANDI (14)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","MANGALURA (15)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","YARABAGA (16)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","TADOLA (17)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","RAJESHVARA (3)","GHOGGA (18)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","MUDABI (1)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","KHANAPURA BH (2)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","BAGADHURI (3)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","HATYALA (4)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","HARAKUDA (5)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","SARAJAVALAGA (6)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","JANAVADA (7)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","HIPPARAGA BH (8)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","MAISALAGA (9)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","KALAKHORA (10)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","HIRANAGANVA (11)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","SUNGATANA (12)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","EKALURA (13)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","GADALEGANVA BH (14)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","YALAVANTI (15)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","KHERDA KH (16)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","CHIKANAGANVA (17)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","SIRAGAPURA (18)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","KINNI (19)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","YADALAGUNDI (20)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","SAIDAPURA (21)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","MUDABI (4)","HAMUNAGARA (22)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","KOHINURA (1)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","LADAVANTI (2)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","EKKAMBA (3)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","DHAMURI (4)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","UJALAMBA (5)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","CHITTAKOTA (6)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","BHAKANALA (7)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","BETAGERA (8)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","GADALEGANVA (9)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","SIRAGURA (10)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","RAMATIRTHAD (11)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","GILIGILI (12)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","HATTARAGA S (13)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","CHITTAKOTAK (14)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","BHOSAGA (15)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","MANAKHEDA (16)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","ATTURA (17)"],
+        ["BIDAR (5)","BASAVAKALYAN (1)","KOHINURA (5)","SIRURI (18)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","BHALKI (1)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","BAJULAGA (2)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","KORURA (3)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","KARADIYALA (4)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","KADALABADA (5)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","GUBYALA (6)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","DHARAJAVADI (8)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","TALAVADA KH (9)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","SAIDAPURAVADI (10)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","JOLADABAKA (11)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","SIDDESHVARA (12)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","MARURA (13)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","CHIKALACHANDA (14)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","KUNTESHIRSHI (15)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","MADAKATTI (16)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","KALAVADI (17)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","HARANALA (18)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","DADAGI (19)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","RAMATIRTHAVADI (20)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","EKALASAPURAVADI (21)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","GORACHINCHOLI (22)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","NIDEBAN (23)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","ANANDAVADI (24)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","KOTAGERA (25)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","KOTAGYALAVADI (26)"],
+        ["BIDAR (5)","BHALKI (2)","BHALKI (1)","GANESHAPURAVADI (27)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","SAYAGANVA (1)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","KHUDAVANDAPURA (2)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","INCHURA (3)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","KESARA JAVALAGA (4)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","SHREEMALI (5)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","JAMAKHANDI (6)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","VANJARAKHEDA (7)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","KONGALI (8)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","RU GOWNDAGANVA (9)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","KUNTEGANVA (10)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","LADA (11)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","HALASI L (12)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","JEERAGYALA (13)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","VAGALAGANVA (14)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","GUNJARAGA (15)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","ATTARAGA (16)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","ALAVAYI (17)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","NARADASANGAMA (18)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","MEHAKARA (19)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","MANIKESHVARA (20)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","TUGANVA H (21)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","BOLEGANVA (22)"],
+        ["BIDAR (5)","BHALKI (2)","SAYAGANVA (2)","ELAMAVADI (23)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","NITTURA BH (1)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","AMBESANGAVI (2)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","HAJANALA (3)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","GORANALA (4)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","BEERIKH (5)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","NAGARALA (6)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","MURALA (7)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","KUDLI (8)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","HUPALA (9)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","KERURA (10)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","AHMADABADA (11)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","JAINAPURA (12)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","BALURA (13)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","KOTAGYALA (14)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","CHANDAPURA (15)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","KHASHAMAPURA (16)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","DONGARAGI (17)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","VALASANGA (18)"],
+        ["BIDAR (5)","BHALKI (2)","NITTURABH (3)","SIDDAPURA VADI (19)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","KHATAKA CHINCHOLI (1)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","UCHYA (2)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","BYALAHALLI W (3)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","VARAVATTI (4)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","DAVARAGANVA (6)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","TUGANVACH (7)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","NELVADA (8)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","MORAMBI (9)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","HONNALLI (10)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","HALAGORTA (11)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","CHALAKAPURA (12)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","NAVADAGI (13)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","KAPALAPURA (14)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","MAVINAHALLI (15)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","ENAKURA (16)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","BARADAPURA (17)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","KURABA KHELAGI (18)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","MASHIMADU (19)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","CHITTA (20)"],
+        ["BIDAR (5)","BHALKI (2)","KHATAKA CHINCHULI (4)","SIKINDRABADA VADI (21)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","LAKHANAGANVA (1)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","ALANDI (2)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","KALASADALA (3)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","HACHCHIKAMATA (4)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","DONAGAPURA (5)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","KAKANALA (6)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","METIMELAKUNDA (7)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","BHATAMBRA (8)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","BEERIBH (9)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","HUNAJIA (10)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","LANJAVADA (12)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","BHATASANGAVI (13)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","SHIVANI (14)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","TALAVADAM (15)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","TELAGANVA (16)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","SOMAPURA (17)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","ATANURA (18)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","KALASARATUGANVA (19)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","JAYAGANVA (20)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","TAMAGYALA (21)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","SHAMASHERAPURA (22)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","METIMELAKUNDA VADI (25)"],
+        ["BIDAR (5)","BHALKI (2)","LAKHANAGANVA (5)","KASARATUGANVA VADI (26)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","HALABARGA (1)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","KANAJI (2)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","TEGAMPURA (3)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","HALAHIPPARAGA (4)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","KOSAMA (5)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","NAGURAKE (6)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","ALIYABADA (7)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","TARANALLI (8)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","HUNAJEE K (9)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","GODIHIPPARGA (10)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","DHANNURAH (11)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","KONAMELAKUNDA (12)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","KHANAPURA (13)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","RUDANURA (14)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","MALACHAPURA (15)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","JANTI (16)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","NELAGI (17)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","BYALAHALLIKH (18)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","KAMALAPURA (19)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","NIRAMANAHALLI (20)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","SEVANAGARA (21)"],
+        ["BIDAR (5)","BHALKI (2)","HALABARGA (6)","HALAHALLI K (22)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","OWRADABI (1)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","MAMADAPURA (2)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","NARAYANAPURA (3)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","GANESHAPURE (4)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","ALLAPURA (5)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","NARASINHAPURA (6)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","EKALARA (7)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","TULAJAPURA (8)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","BORALA (9)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","BADALAGANVA (10)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","DUDUKANALA (11)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","VANAMARAPALLI (12)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","MUNGANALA (13)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","KAPPIKERI (14)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","HASSIKERI (15)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","KHANDIKERI (16)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","HULLYALA (17)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","EKAMBA (18)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","JAMALAPURA (19)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","KOLLURA (20)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","JONNIKERI (21)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","MAHADONAGANVA (22)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","TEGAMPURA (23)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","GOWNDAGANVA (24)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","BONTI (26)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","HANGARAGABI (27)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","HOKRANA (28)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","KHERDABI (29)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","KARAKYALA (30)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","DONGARAGAVA (31)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","BANDARA KUMATA (32)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","LINGI (33)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","BAVALAGANVA (34)"],
+        ["BIDAR (5)","AURAD (3)","OWRADABI (1)","SAVARAGANVA (35)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","CHINTAKI (1)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","BELDALA (2)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","JOJANA (3)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","NAGURAN (4)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","LINGADALSHIKH (5)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","KARANJIBI (6)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","KARANJIKE (7)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","MANURAKE (8)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","RAYAPALLI (9)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","NAGANAPALLI (10)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","LINGADALLI J (11)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","SUNDALA (12)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","KHASEMPURAA (13)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","UJANI (14)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","SUNKANALA (15)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","GUDAPALLI (16)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","NAGAMARAPALLI (17)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","NANDYALA (18)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","JAKANALA (19)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","ITAGYALA (20)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","ENAGUNDA (21)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","MEDAPALLI (22)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","NAGUREM (23)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","CHIKLIJE (24)"],
+        ["BIDAR (5)","AURAD (3)","CHINTAKI (2)","BARADAPURA (25)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","SANTAPURA (1)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","JIRGABI (2)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","JEERGAKE (3)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","JAMBAGI (4)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","MAHARAJAVADI (5)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","SHEMBELLI (6)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","CHATANALA (7)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","GADIKUSANURA (8)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","PASHAPURA (9)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","BALURAJE (10)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","KOWTABI (11)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","KOWTAKE (12)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","BELUREN (13)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","VALLEPURA (14)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","ALURAKE (15)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","SORALLI (16)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","KOWDAGANVA (17)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","ALURABI (18)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","MUSTAPURA (19)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","BORGIJE (20)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","KANDAGULA (22)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","KHANAPURA (23)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","VADAGANVAD (24)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","KHASEMPURA B (25)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","RAKSHSHALA K (26)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","MASKALA (27)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","NAGURA B (28)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","BELAKONI CHOWDARI (29)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","RAKSHYALA B (30)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","DUPATAMAHAGANVA (31)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","MANIGEMPURA (32)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","LADHA (33)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","BACHEPALLI (34)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","BABALI (35)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","HEDAGAPURA (36)"],
+        ["BIDAR (5)","AURAD (3)","SANTAPURA (3)","NITDORA K (37)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","RAKSHSHALA K (2)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","MASKALA (3)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","NAGURA B (4)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","BELAKONI CHOWDARI (5)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","RAKSHYALA B (6)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","DUPATAMAHAGANVA (10)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","MANIGEMPURA (11)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","LADHA (14)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","BACHEPALLI (15)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","BABALI (16)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","HEDAGAPURA (17)"],
+        ["BIDAR (5)","AURAD (3)","TANAKUSANURA (4)","NITDORA K (18)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","BONTI (4)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","HANGARAGABI (5)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","HOKRANA (6)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","KHERDABI (7)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","KARAKYALA (8)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","DONGARAGAVA (9)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","BANDARA KUMATA (14)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","LINGI (15)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","BAVALAGANVA (20)"],
+        ["BIDAR (5)","AURAD (3)","DABAKA (6)","SAVARAGANVA (21)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","CHILLARGI (1)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","CHIMAKODA (2)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","KHAJAPURA (3)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","BASANTAPURA (4)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","KANGATI (5)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","FATTEPURACH (6)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","KAPALAPURAJH (7)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","JAMPADA (8)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","AMADALAPADA (9)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","ALAMASAPURA (10)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","RASULABADA (11)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","MALEGANVA (12)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","NANDAGANVA (13)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","MIRAJAPURAKH (14)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","GADAGI (15)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","HAMILAPURA (16)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","CHIKKAPETA (17)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","NAVADAGERI (18)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","GUMMA (19)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","SHAMARAJAPURA (20)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","SOLAPURA (21)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","SIPPALAGERA (22)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","MAMANAKERI (23)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","KABEERAVADA (24)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","TAJALAPURA (25)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","ODAVADA (26)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","ALIYABADA (27)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","IMAMABADA (28)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","FATTEPURAJH (29)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","SHERIHUSENI (30)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","BAVAPURA (31)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","DATTANAKERI (32)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","ALANKERI (33)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","KHILLARKA (34)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","SULTANAPURAKH (35)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARA UTTARA (1)","BAGE KARANJA (36)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","ASHTURA (1)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","MIRAJAPURAT (2)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","MALKAPURA (3)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","SULTANAPURAJH (4)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","HALADAKERI KH (5)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","MAILURA (6)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","KUMBARAVADA (7)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","AMALAPURA (8)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","GORANALLI BH (9)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","CHITTA (10)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","GUNNALLI (11)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","SHAHAPURA (12)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","HALADAKERI JH (13)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","BRAHMAPURA (14)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","BAGEHAMAMA (15)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","SHERICHAMPA (16)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","GULLARAHAVEELI (17)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","JANGALAKOYI (18)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","BAGEIBRAHIMA (19)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","MAILATEGAIRABI (20)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","BAGE-KHARIDI (21)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","MAILATEGORANALLI (22)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","BAGE-SHAHI (23)"],
+        ["BIDAR (5)","BIDAR (4)","BEEDARADAKSHINA (2)","BAGEGORANALLI (24)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","MANNALLI (1)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","HOKRANABH (2)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","HOKRANAKH (3)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","NAGORA (4)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","GHODEPALLI (5)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","BUDHERA (6)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","T MIRJAPURA (7)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","CHINTALAGERA (8)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","DHARMAPURA (9)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","GOWSAPURA (10)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","YAKATAPURA (11)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","SATOLI (12)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","BARURA (13)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","RAJAGIRA (14)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","SINDHOLA (15)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","REKULAGI (16)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","TADAPALLI (17)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","BAMBALAGI (18)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","MARAKUNDA (19)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","BHANGURA (20)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","MUGADALA (21)"],
+        ["BIDAR (5)","BIDAR (4)","MANNALLI (3)","BAPURA (22)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","BAGADALA (1)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","OWRADES (2)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","SIRASI A (3)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","HONNADDI (4)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","SHEKHAPURA (5)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","PATARAPALLI (6)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","BHAIRANALLI CH (7)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","KHASHEMPURACH (8)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","BAVAGI (9)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","NELAVADA (10)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","KHASHEMPURAP (11)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","MALIKA MEERJAPURA (12)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","MANDAKANALLI (13)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","KANGANAKOTA (14)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","KADAVADA (15)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","SHEMASHANAGARA (16)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","CHATNALLI (17)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","BARIDABADA (18)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","SANGOLAGI (19)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","RANJOLA  KHENI (20)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","NIDAVANCHA (21)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","SIRAKATANALLI (22)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","HOCHAKANALLI (23)"],
+        ["BIDAR (5)","BIDAR (4)","BAGADALA (4)","HAJJARAGI (24)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","KAMATANA (1)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","SIKINDRAPURA (2)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","KHADARANAGARA (3)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","BAKACHOWDI (4)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","NIJAMAPURA (5)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","BELLURA (6)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","JAMISTANAPURA (7)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","YADLAPURA (8)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","KUTTABADA (9)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","AYASAPURA (10)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","NOWBADA (11)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","CHONDI (12)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","CHOWLI (13)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","KOLARAKE (14)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","CHIDRI (15)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","KOLARABI (16)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","ANADURA (17)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","KAPALAPURAA (18)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","ATIVALA (19)"],
+        ["BIDAR (5)","BIDAR (4)","KAMATANA (5)","HONNIKERI (20)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","JANAVADA (1)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","KHANAJAMALAPURA (2)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","ALIYAMBARA (3)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","MAMADAPURA (4)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","YARANALLIPI (5)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","YARANALLIDI (6)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","BAMPALLI (7)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","ISLAMPURA (8)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","MARAKHALA (9)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","BENAKANALLI (10)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","DADDAPURA (11)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","SHREEMANDALA (12)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","NEMATABADA (13)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","NAVALASAPURA (14)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","CHAMBOLA (15)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","HIPPALAGANVA (16)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","KANNALLI (17)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","ALLAPURA (18)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","RAJANALA (19)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","SIDDAPURA (20)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","SANGAVI (21)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","VILASAPURA (22)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","BHAIRANALLIDI (23)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","GUMATAPURA (24)"],
+        ["BIDAR (5)","BIDAR (4)","JANAVADA (6)","IMAMAPURA (25)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","HUMANABADA (1)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","DHUMMANASURA (2)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","HUDAGI (3)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","GADAVANTI (4)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","MANIKANAGARA (5)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","MOLAKERA (6)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","HANAKUNI (7)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","BORAMPALLI (8)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","KAPPARAGANVA (9)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","NANDAGANVA (10)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","HALLIKHEDAKE (11)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","MUSTAPURA (12)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","CHITAKOTA (13)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","KALLURA (14)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","KATALLI (15)"],
+        ["BIDAR (5)","HUMNABAD (5)","HUMANABADA (1)","SINDHANAKERA (16)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","HALLILIKHEDABI (1)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","SINDABANDAGI (2)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","ATIVALA (3)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","NAMADAPURA (4)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","BENACHINCHOLI (5)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","KABEERABADA (6)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","MADARAGANVA (7)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","MALKAPURA VADI (8)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","DAKULAGI (9)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","AMIRABADA (10)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","ALLURA (11)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","BOTAGI (12)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","MARAKHALA (13)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","HILALAPURA (14)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","SHAKKARAGANJA (15)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","SITALAGERA (16)"],
+        ["BIDAR (5)","HUMNABAD (5)","HALLILIKHEDABI (2)","NIMBURA (17)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","DUBALAGUNDI (1)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","GHODAVADI (2)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","GHATABORALA (3)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","HUNASAGERA (4)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","KANAKATTA (5)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","HUNASANALA (6)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","SEDOLA (7)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","JALASINGI (8)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","KUMARA CHINCHOLI (9)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","HANDIKERA (10)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","VARAVATTIKE (11)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","OTAGI (12)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","SULTANABADA (13)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","CHEENAKERA (14)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","MUGANURA (15)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","CHANDANAHALLI (16)"],
+        ["BIDAR (5)","HUMNABAD (5)","DUBALAGUNDI (3)","SONAKERA (17)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","CHITAGUPPA (1)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","MUSTARI (2)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","GURUDALA (3)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","KODAMBALA (4)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","BELAKERA (5)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","VALAKHINDI (6)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","RAMAPURA (7)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","TALAMADAGI (8)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","HIPPARGA (9)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","MUDANALA (10)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","ITAGA (11)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","SHAMATABADA (12)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","KANDAGOLA (13)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","VADDANAKERA (14)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","MADAGOLA (15)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","CHITAGUPPA (4)","BHASKARA NAGARA (16)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","NIRNA (1)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","MADARAGI (2)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","BHADRAPURA (3)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","BASHEERAPURA (4)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","DEVAGEERI (5)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","MUTTANGI (6)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","ALIPURA (7)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","UDABALA (8)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","BANNALLI (9)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","MANGALAGI (10)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","NIRNA (5)","NAGANAKERA (11)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","BEMALAKHEDA (1)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","UDAMANALLI (2)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","POLAKAPALLI (3)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","KARAPAPALLI (4)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","KARAKANALLI (5)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","SAIDAPURA (6)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","MEENAKERA (7)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","BORALA (8)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","MANNAEKHELLI (9)"],
+        ["BIDAR (5)","CHITAGUPPA (6)","BEMALAKHEDA (6)","CHANGALERA (10)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","TANAKUSANURA (1)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","BALATA B (7)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","BALATA K (8)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","CHANDORI (9)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","BEDAKUNDA (12)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","HIPPALAGANVA (13)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","NIDODA (19)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","HALAHALLI (20)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","KOREKALA (21)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","BEMBRA (22)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","LINGADALLIYU (23)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","MUDHOLABI (24)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","MUDHOLA K (25)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","TANAKUSANURA (4)","SANGAMA (26)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","KAMALANAGARA (1)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","TORANA (2)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","DONAGANVA M (3)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","BAVANIBIJALAGANVA (4)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","SAVALI (5)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","BELAKUNIBHO (6)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","SONALA (7)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","HORANDI (8)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","BALURA K (9)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","MADANURA (10)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","MURGAKE (11)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","CHANDESHVARA (12)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","KHEDA (13)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","KHATAGANVA (14)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","RANDYALA (15)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","KALAGAPURA (16)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","HULASURAKHEDA (17)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","DIGGI (18)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","KOTAGYALA (19)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","RAMAPURA (20)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","TAPASHYALA (21)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","BASANALA (22)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","KORIYALA (23)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","HAKYALA (24)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","KAMALANAGARA (5)","HOLA SAMUDRA (25)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","DABAKA (1)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","VAGANAGERA (2)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","AKANAPURA (3)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","MALEGANVA (10)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","MUTAKHEDA (11)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","CHONDIMUKHEDA (12)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","NANDIBIJALAGANVA (13)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","CHIMEGANVA (16)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","HANDIKERA (17)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","CHIKALI U (18)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","GANESHAPURAYU (19)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","SANGANALA (22)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","DAREGANVA (23)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","MURKI (24)"],
+        ["BIDAR (5)","KAMALANAGARA (7)","DABAKA (6)","GANGANABEEDA (25)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","HULASURA (1)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","SOLADABAKA (2)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","TOGALURA (3)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","KADARABADA (4)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","DEVANALA (5)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","HALAHALLI (6)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","MACHANALA (7)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","GADIGOWNDAGANVA (8)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","MIRKALA (9)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","GUTTI (10)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","BELURA (11)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","GORTABH (12)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","MACHALAMBA (13)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","GADIRAYAPALLI (14)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","KADEPURA (15)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","LIMBAPURA (16)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","MUSTAPURA (17)"],
+        ["BIDAR (5)","HULASURA (8)","HULASURA (6)","KOTAMALA (18)"]
+    ];
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
+    const talukMap = {
+        "BASAVAKALYAN (1)":"BASAVAKALYAN (3)","BHALKI (2)":"BHALKI (2)","AURAD (3)":"AURAD (4)","BIDAR (4)":"BIDAR (1)","HUMNABAD (5)":"HUMNABAD (6)","CHITAGUPPA (6)":"CHITAGUPPA (5)","KAMALANAGARA (7)":"KAMALANAGARA (4)","HULASURA (8)":"HULASURA (3)"
+    };
+    const rawRows = rawRowsOriginal.map(r => [r[0], talukMap[r[1]] || r[1], r[2], r[3]]);
+
+    // ----- TABLE DEFINITION with custom ordering -----
+    const tableDefs = [
+        // Application Level (with added hst tables)
+        { value: 'hst_appl_mutation', group: 'application', label: 'hst_appl_mutation' },
+        { value: 'hst_appl_mutation_owners', group: 'application', label: 'hst_appl_mutation_owners' },
+        { value: 'appl_mutation', group: 'application', label: 'appl_mutation' },
+        { value: 'appl_mutation_owners', group: 'application', label: 'appl_mutation_owners' },
+        // Transaction Level (custom order)
+        { value: 'tr_mutation', group: 'transaction', label: 'tr_mutation' },
+        { value: 'tr_mutation_surveynos', group: 'transaction', label: 'tr_mutation_surveynos' },
+        { value: 'tr_moldown', group: 'transaction', label: 'tr_moldown' },
+        { value: 'tr_mnewown', group: 'transaction', label: 'tr_mnewown' },
+        { value: 'tr_podi_rtc', group: 'transaction', label: 'tr_podi_rtc' },
+        { value: 'tr_podi_owner', group: 'transaction', label: 'tr_podi_owner' },
+        { value: 'tr_podi_owner_loan', group: 'transaction', label: 'tr_podi_owner_loan' },
+        { value: 'tr_crop', group: 'transaction', label: 'tr_crop' },
+        { value: 'tr_mcrop', group: 'transaction', label: 'tr_mcrop' },
+        { value: 'tr_mcultiv', group: 'transaction', label: 'tr_mcultiv' },
+        { value: 'tr_mnewown_loan', group: 'transaction', label: 'tr_mnewown_loan' },
+        { value: 'tr_integrate_podi_mcultiv', group: 'transaction', label: 'tr_integrate_podi_mcultiv' },
+        { value: 'tr_integrate_podi_owner', group: 'transaction', label: 'tr_integrate_podi_owner' },
+        { value: 'tr_integrate_podi_rtc', group: 'transaction', label: 'tr_integrate_podi_rtc' },
+        // History Tables
+        { value: 'hst_crop', group: 'history', label: 'hst_crop' },
+        { value: 'hst_cultiv', group: 'history', label: 'hst_cultiv' },
+        { value: 'hst_head', group: 'history', label: 'hst_head' },
+        { value: 'hst_mcrop', group: 'history', label: 'hst_mcrop' },
+        { value: 'hst_owner', group: 'history', label: 'hst_owner' },
+        { value: 'hst_owner_details', group: 'history', label: 'hst_owner_details' },
+        { value: 'hst_owner_loan', group: 'history', label: 'hst_owner_loan' },
+        { value: 'hst_tr_crop', group: 'history', label: 'hst_tr_crop' },
+        { value: 'hst_tr_integrate_podi_mcultiv', group: 'history', label: 'hst_tr_integrate_podi_mcultiv' },
+        { value: 'hst_tr_integrate_podi_owner', group: 'history', label: 'hst_tr_integrate_podi_owner' },
+        { value: 'hst_tr_integrate_podi_rtc', group: 'history', label: 'hst_tr_integrate_podi_rtc' },
+        { value: 'hst_tr_mcrop', group: 'history', label: 'hst_tr_mcrop' },
+        { value: 'hst_tr_mcultiv', group: 'history', label: 'hst_tr_mcultiv' },
+        { value: 'hst_tr_mnewown', group: 'history', label: 'hst_tr_mnewown' },
+        { value: 'hst_tr_mnewown_loan', group: 'history', label: 'hst_tr_mnewown_loan' },
+        { value: 'hst_tr_moldown', group: 'history', label: 'hst_tr_moldown' },
+        { value: 'hst_tr_mutation', group: 'history', label: 'hst_tr_mutation' },
+        { value: 'hst_tr_mutation_surveynos', group: 'history', label: 'hst_tr_mutation_surveynos' },
+        { value: 'hst_tr_podi_owner', group: 'history', label: 'hst_tr_podi_owner' },
+        { value: 'hst_tr_podi_owner_loan', group: 'history', label: 'hst_tr_podi_owner_loan' },
+        { value: 'hst_tr_podi_rtc', group: 'history', label: 'hst_tr_podi_rtc' },
+        // RTC Tables
+        { value: 'rtc_head', group: 'rtc', label: 'rtc_head' },
+        { value: 'rtc_owner', group: 'rtc', label: 'rtc_owner' },
+        { value: 'rtc_cultiv', group: 'rtc', label: 'rtc_cultiv' },
+        { value: 'rtc_crop', group: 'rtc', label: 'rtc_crop' },
+        // GSC Tables
+        { value: 'GSC_SERVICES_TRAN', group: 'gsc', label: 'GSC_SERVICES_TRAN' },
+        { value: 'GSC_UPDATE_TRAN', group: 'gsc', label: 'GSC_UPDATE_TRAN' }
+    ];
+
+    // ----- RENDER CHECKBOXES (preserves selections across group switches) -----
+    let currentChecked = new Set();
+
+    function renderCheckboxes(groupFilter = 'all') {
+        const container = document.getElementById('tableSelectContainer');
+        
+        let html = `<label class="all-tables"><input type="checkbox" id="selectAllTables"> ✅ All Tables</label>`;
+        const filtered = groupFilter === 'all' ? tableDefs : tableDefs.filter(t => t.group === groupFilter);
+        filtered.forEach(t => {
+            const checked = currentChecked.has(t.value) ? 'checked' : '';
+            html += `<label><input type="checkbox" value="${t.value}" ${checked}> ${t.label}</label>`;
         });
+        container.innerHTML = html;
+
+        // re-bind "All Tables"
+        const selectAll = document.getElementById('selectAllTables');
+        if (selectAll) {
+            selectAll.addEventListener('change', function() {
+                const allCbs = document.querySelectorAll('#tableSelectContainer input[type="checkbox"]:not(#selectAllTables)');
+                allCbs.forEach(cb => cb.checked = selectAll.checked);
+                currentChecked.clear();
+                allCbs.forEach(cb => { if (cb.checked) currentChecked.add(cb.value); });
+            });
+        }
+        // bind individual checkboxes
+        document.querySelectorAll('#tableSelectContainer input[type="checkbox"]:not(#selectAllTables)')
+            .forEach(cb => {
+                cb.addEventListener('change', function() {
+                    if (this.checked) currentChecked.add(this.value);
+                    else currentChecked.delete(this.value);
+                    const allCbs = document.querySelectorAll('#tableSelectContainer input[type="checkbox"]:not(#selectAllTables)');
+                    const allChecked = Array.from(allCbs).every(c => c.checked);
+                    const sa = document.getElementById('selectAllTables');
+                    if (sa) sa.checked = allChecked;
+                });
+            });
     }
 
-    function getUniqueValues(colIndex, rows = rawRows) {
-        const unique = new Set();
-        rows.forEach(row => unique.add(row[colIndex]));
-        return Array.from(unique).sort();
-    }
+    // radio change -> re-render checkboxes (preserve selections)
+    document.querySelectorAll('input[name="tableGroup"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            renderCheckboxes(this.value);
+        });
+    });
 
-    // ===== DOM refs =====
+    // init with 'all'
+    renderCheckboxes('all');
+
+    // ---- helpers ----
+    function extractCode(str) { if (!str) return null; const m = str.match(/\((\d+)\)/); return m ? parseInt(m[1],10) : null; }
+    function escapeHtml(s) { if (!s) return ''; return s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m] || m); }
+    function getUniqueValues(col, rows = rawRows) { const s = new Set(); rows.forEach(r => s.add(r[col])); return Array.from(s).sort(); }
+
+    // DOM refs
     const districtSelect = document.getElementById('districtSelect');
     const talukSelect = document.getElementById('talukSelect');
     const hobliSelect = document.getElementById('hobliSelect');
@@ -1497,69 +1437,51 @@
     const queryGrid = document.getElementById('queryGrid');
     const queryCount = document.getElementById('queryCount');
     const copyAllBtn = document.getElementById('copyAllBtn');
-    const selectAllTables = document.getElementById('selectAllTables');
-
     const applNoInput = document.getElementById('applNoInput');
     const tranNoInput = document.getElementById('tranNoInput');
     const yearCodeInput = document.getElementById('yearCodeInput');
 
-    // ===== Populate functions =====
+    // populate
     function populateDistricts() {
-        const districts = getUniqueValues(0);
-        districtSelect.innerHTML = '<option value="">All Districts</option>' +
-            districts.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join('');
+        const d = getUniqueValues(0);
+        districtSelect.innerHTML = '<option value="">All Districts</option>' + d.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
     }
-
     function populateTaluks() {
-        const selectedDistrict = districtSelect.value;
-        let filteredRows = rawRows;
-        if (selectedDistrict) filteredRows = rawRows.filter(row => row[0] === selectedDistrict);
-        const taluks = getUniqueValues(1, filteredRows);
-        talukSelect.innerHTML = '<option value="">All Taluks</option>' +
-            taluks.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+        const sd = districtSelect.value;
+        let filtered = sd ? rawRows.filter(r => r[0] === sd) : rawRows;
+        const t = getUniqueValues(1, filtered);
+        talukSelect.innerHTML = '<option value="">All Taluks</option>' + t.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
         populateHoblis();
     }
-
     function populateHoblis() {
-        const selectedDistrict = districtSelect.value;
-        const selectedTaluk = talukSelect.value;
-        let filteredRows = rawRows;
-        if (selectedDistrict) filteredRows = filteredRows.filter(r => r[0] === selectedDistrict);
-        if (selectedTaluk) filteredRows = filteredRows.filter(r => r[1] === selectedTaluk);
-        const hoblis = getUniqueValues(2, filteredRows);
-        hobliSelect.innerHTML = '<option value="">All Hoblis</option>' +
-            hoblis.map(h => `<option value="${escapeHtml(h)}">${escapeHtml(h)}</option>`).join('');
+        const sd = districtSelect.value, st = talukSelect.value;
+        let filtered = rawRows;
+        if (sd) filtered = filtered.filter(r => r[0] === sd);
+        if (st) filtered = filtered.filter(r => r[1] === st);
+        const h = getUniqueValues(2, filtered);
+        hobliSelect.innerHTML = '<option value="">All Hoblis</option>' + h.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
         populateVillages();
     }
-
     function populateVillages() {
-        const selectedDistrict = districtSelect.value;
-        const selectedTaluk = talukSelect.value;
-        const selectedHobli = hobliSelect.value;
-        let filteredRows = rawRows;
-        if (selectedDistrict) filteredRows = filteredRows.filter(r => r[0] === selectedDistrict);
-        if (selectedTaluk) filteredRows = filteredRows.filter(r => r[1] === selectedTaluk);
-        if (selectedHobli) filteredRows = filteredRows.filter(r => r[2] === selectedHobli);
-        const villages = getUniqueValues(3, filteredRows);
-        villageSelect.innerHTML = '<option value="">All Villages</option>' +
-            villages.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+        const sd = districtSelect.value, st = talukSelect.value, sh = hobliSelect.value;
+        let filtered = rawRows;
+        if (sd) filtered = filtered.filter(r => r[0] === sd);
+        if (st) filtered = filtered.filter(r => r[1] === st);
+        if (sh) filtered = filtered.filter(r => r[2] === sh);
+        const v = getUniqueValues(3, filtered);
+        villageSelect.innerHTML = '<option value="">All Villages</option>' + v.map(vl => `<option value="${escapeHtml(vl)}">${escapeHtml(vl)}</option>`).join('');
         applyFilters();
     }
 
-    // ===== Apply filters & update table =====
     function applyFilters() {
-        const districtVal = districtSelect.value;
-        const talukVal = talukSelect.value;
-        const hobliVal = hobliSelect.value;
-        const villageVal = villageSelect.value;
-        const villageTerm = villageSearch.value.trim().toLowerCase();
-
+        const d = districtSelect.value, t = talukSelect.value, h = hobliSelect.value, v = villageSelect.value;
+        const term = villageSearch.value.trim().toLowerCase();
         const filtered = rawRows.filter(row => {
-            if (districtVal && row[0] !== districtVal) return false;
-            if (talukVal && row[1] !== talukVal) return false;
-            if (hobliVal && row[2] !== hobliVal) return false;
-            if (villageVal && row[3] !== villageVal) return false;
-            if (villageTerm && !row[3].toLowerCase().includes(villageTerm)) return false;
+            if (d && row[0] !== d) return false;
+            if (t && row[1] !== t) return false;
+            if (h && row[2] !== h) return false;
+            if (v && row[3] !== v) return false;
+            if (term && !row[3].toLowerCase().includes(term)) return false;
             return true;
         });
         updateTableUI(filtered);
@@ -1569,249 +1491,117 @@
     }
 
     function updateTableUI(rows) {
-        if (rows.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="4" class="no-results">🏞️ No matching records — try adjusting filters.</td></tr>`;
-            return;
-        }
-        const fragment = document.createDocumentFragment();
+        if (!rows.length) { tbody.innerHTML = `<tr><td colspan="4" class="no-results">🏞️ No matching records — try adjusting filters.</td></tr>`; return; }
+        let html = '';
         rows.forEach(row => {
-            const tr = document.createElement('tr');
-            const villageName = escapeHtml(row[3]);
-            const villageCode = extractCode(row[3]);
-            const villageLink = `<a href="#" class="village-link" data-village="${escapeHtml(row[3])}" data-code="${villageCode !== null ? villageCode : ''}" data-dist="${escapeHtml(row[0])}" data-taluk="${escapeHtml(row[1])}" data-hobli="${escapeHtml(row[2])}">${villageName}</a>`;
-            tr.innerHTML = `
-                    <td>${escapeHtml(row[0])}</td>
-                    <td>${escapeHtml(row[1])}</td>
-                    <td>${escapeHtml(row[2])}</td>
-                    <td>${villageLink}</td>
-                `;
-            fragment.appendChild(tr);
+            const vname = escapeHtml(row[3]);
+            const vcode = extractCode(row[3]);
+            const link = `<a href="#" class="village-link" data-village="${escapeHtml(row[3])}" data-code="${vcode!==null?vcode:''}" data-dist="${escapeHtml(row[0])}" data-taluk="${escapeHtml(row[1])}" data-hobli="${escapeHtml(row[2])}">${vname}</a>`;
+            html += `<tr><td>${escapeHtml(row[0])}</td><td>${escapeHtml(row[1])}</td><td>${escapeHtml(row[2])}</td><td>${link}</td></tr>`;
         });
-        tbody.innerHTML = '';
-        tbody.appendChild(fragment);
-
-        // Attach click events to village links
+        tbody.innerHTML = html;
         document.querySelectorAll('.village-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const villageName = this.dataset.village;
-                const distName = this.dataset.dist;
-                const talukName = this.dataset.taluk;
-                const hobliName = this.dataset.hobli;
-
-                // Set dropdowns to match the clicked village's hierarchy
-                const districtSelect = document.getElementById('districtSelect');
-                const talukSelect = document.getElementById('talukSelect');
-                const hobliSelect = document.getElementById('hobliSelect');
-                const villageSelect = document.getElementById('villageSelect');
-
-                // Set district
-                for (let opt of districtSelect.options) {
-                    if (opt.value === distName) {
-                        districtSelect.value = distName;
-                        break;
-                    }
-                }
-                // Trigger taluk population
+                const village = this.dataset.village, dist = this.dataset.dist, taluk = this.dataset.taluk, hobli = this.dataset.hobli;
+                for (let opt of districtSelect.options) { if (opt.value === dist) { districtSelect.value = dist; break; } }
                 populateTaluks();
-                // Set taluk
-                for (let opt of talukSelect.options) {
-                    if (opt.value === talukName) {
-                        talukSelect.value = talukName;
-                        break;
-                    }
-                }
-                // Trigger hobli population
+                for (let opt of talukSelect.options) { if (opt.value === taluk) { talukSelect.value = taluk; break; } }
                 populateHoblis();
-                // Set hobli
-                for (let opt of hobliSelect.options) {
-                    if (opt.value === hobliName) {
-                        hobliSelect.value = hobliName;
-                        break;
-                    }
-                }
-                // Trigger village population
+                for (let opt of hobliSelect.options) { if (opt.value === hobli) { hobliSelect.value = hobli; break; } }
                 populateVillages();
-                // Set village
-                for (let opt of villageSelect.options) {
-                    if (opt.value === villageName) {
-                        villageSelect.value = villageName;
-                        break;
-                    }
-                }
-                // Set search field
-                document.getElementById('villageSearch').value = villageName;
-
-                // Trigger filters and query generation
+                for (let opt of villageSelect.options) { if (opt.value === village) { villageSelect.value = village; break; } }
+                villageSearch.value = village;
                 applyFilters();
                 generateQueries();
-                // Scroll to queries
                 document.querySelector('.query-grid-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     }
 
-    // ===== All Tables checkbox =====
-    selectAllTables.addEventListener('change', function() {
-        const checkboxes = document.querySelectorAll('#tableSelectContainer input[type="checkbox"]');
-        checkboxes.forEach(cb => {
-            if (cb.id !== 'selectAllTables') {
-                cb.checked = selectAllTables.checked;
-            }
-        });
-    });
-
-    document.querySelectorAll('#tableSelectContainer input[type="checkbox"]').forEach(cb => {
-        if (cb.id !== 'selectAllTables') {
-            cb.addEventListener('change', function() {
-                const allCheckboxes = document.querySelectorAll('#tableSelectContainer input[type="checkbox"]:not(#selectAllTables)');
-                const allChecked = Array.from(allCheckboxes).every(c => c.checked);
-                selectAllTables.checked = allChecked;
-            });
-        }
-    });
-
-    // ===== Reset =====
     function resetAllFilters() {
-        districtSelect.value = '';
-        talukSelect.value = '';
-        hobliSelect.value = '';
-        villageSelect.value = '';
-        villageSearch.value = '';
-        applNoInput.value = '';
-        tranNoInput.value = '';
-        yearCodeInput.value = '';
-
-        const checkboxes = document.querySelectorAll('#tableSelectContainer input[type="checkbox"]');
-        checkboxes.forEach(cb => cb.checked = false);
-        selectAllTables.checked = false;
-
+        districtSelect.value = ''; talukSelect.value = ''; hobliSelect.value = ''; villageSelect.value = ''; villageSearch.value = '';
+        applNoInput.value = ''; tranNoInput.value = ''; yearCodeInput.value = '';
+        currentChecked.clear();
+        document.querySelectorAll('#tableSelectContainer input[type="checkbox"]').forEach(cb => cb.checked = false);
+        const sa = document.getElementById('selectAllTables'); if (sa) sa.checked = false;
         populateTaluks();
         codeStatsSpan.innerText = '📌 Codes: —';
         queryGrid.innerHTML = `<div class="no-query">Select filters and click Generate Queries to create statements</div>`;
         queryCount.textContent = '0';
     }
 
-    // ===== Generate Queries =====
     function generateQueries() {
-        const districtVal = districtSelect.value;
-        const talukVal = talukSelect.value;
-        const hobliVal = hobliSelect.value;
-        const villageVal = villageSelect.value;
+        const d = districtSelect.value, t = talukSelect.value, h = hobliSelect.value, v = villageSelect.value;
+        const appl = applNoInput.value.trim(), tran = tranNoInput.value.trim(), year = yearCodeInput.value.trim();
+        
+        // IMPORTANT: Read from currentChecked Set (preserves ALL selections across groups)
+        const checked = Array.from(currentChecked);
+        
+        const dc = d ? extractCode(d) : null, tc = t ? extractCode(t) : null, hc = h ? extractCode(h) : null, vc = v ? extractCode(v) : null;
+        let cd = '📌 Codes: ';
+        if (dc !== null) cd += `dist_code=${dc} `;
+        if (tc !== null) cd += `taluk_code=${tc} `;
+        if (hc !== null) cd += `hobli_code=${hc} `;
+        if (vc !== null) cd += `village_code=${vc}`;
+        if (dc===null && tc===null && hc===null && vc===null) cd = '📌 Codes: — (no selection)';
+        codeStatsSpan.innerText = cd.trim();
 
-        const applNo = applNoInput.value.trim();
-        const tranNo = tranNoInput.value.trim();
-        const yearCode = yearCodeInput.value.trim();
+        const conds = [];
+        if (dc !== null) conds.push(`dist_code = ${dc}`);
+        if (tc !== null) conds.push(`taluk_code = ${tc}`);
+        if (hc !== null) conds.push(`hobli_code = ${hc}`);
+        if (vc !== null) conds.push(`village_code = ${vc}`);
+        if (appl) conds.push(`appl_no = '${appl}'`);
+        if (tran) conds.push(`tran_no = '${tran}'`);
+        if (year) conds.push(`year_code = '${year}'`);
 
-        const checkedTables = Array.from(document.querySelectorAll('#tableSelectContainer input[type="checkbox"]:checked'))
-            .filter(cb => cb.id !== 'selectAllTables')
-            .map(cb => cb.value);
-
-        const distCode = districtVal ? extractCode(districtVal) : null;
-        const talukCode = talukVal ? extractCode(talukVal) : null;
-        const hobliCode = hobliVal ? extractCode(hobliVal) : null;
-        const villageCode = villageVal ? extractCode(villageVal) : null;
-
-        let codeDisplay = '📌 Codes: ';
-        if (distCode !== null) codeDisplay += `dist_code=${distCode} `;
-        if (talukCode !== null) codeDisplay += `taluk_code=${talukCode} `;
-        if (hobliCode !== null) codeDisplay += `hobli_code=${hobliCode} `;
-        if (villageCode !== null) codeDisplay += `village_code=${villageCode}`;
-        if (distCode === null && talukCode === null && hobliCode === null && villageCode === null) {
-            codeDisplay = '📌 Codes: — (no selection)';
-        }
-        codeStatsSpan.innerText = codeDisplay.trim();
-
-        const conditions = [];
-        if (distCode !== null) conditions.push(`dist_code = ${distCode}`);
-        if (talukCode !== null) conditions.push(`taluk_code = ${talukCode}`);
-        if (hobliCode !== null) conditions.push(`hobli_code = ${hobliCode}`);
-        if (villageCode !== null) conditions.push(`village_code = ${villageCode}`);
-        if (applNo) conditions.push(`appl_no = '${applNo}'`);
-        if (tranNo) conditions.push(`tran_no = '${tranNo}'`);
-        if (yearCode) conditions.push(`year_code = '${yearCode}'`);
-
-        if (checkedTables.length === 0) {
+        if (!checked.length) {
             queryGrid.innerHTML = `<div class="no-query">⚠️ Please select at least one table from the list</div>`;
             queryCount.textContent = '0';
             return;
         }
-
-        let queriesHTML = '';
-
-        checkedTables.forEach(tableVal => {
-            let coloredQuery = `SELECT * FROM <span class="table-name">${tableVal}</span>`;
-            if (conditions.length > 0) {
-                coloredQuery += ' <span class="keyword">WHERE</span> ';
-                const condParts = [];
-                if (distCode !== null) condParts.push(`<span class="string">dist_code</span> <span class="operator">=</span> <span class="number">${distCode}</span>`);
-                if (talukCode !== null) condParts.push(`<span class="string">taluk_code</span> <span class="operator">=</span> <span class="number">${talukCode}</span>`);
-                if (hobliCode !== null) condParts.push(`<span class="string">hobli_code</span> <span class="operator">=</span> <span class="number">${hobliCode}</span>`);
-                if (villageCode !== null) condParts.push(`<span class="string">village_code</span> <span class="operator">=</span> <span class="number">${villageCode}</span>`);
-                if (applNo) condParts.push(`<span class="string">appl_no</span> <span class="operator">=</span> <span class="string">'${applNo}'</span>`);
-                if (tranNo) condParts.push(`<span class="string">tran_no</span> <span class="operator">=</span> <span class="string">'${tranNo}'</span>`);
-                if (yearCode) condParts.push(`<span class="string">year_code</span> <span class="operator">=</span> <span class="string">'${yearCode}'</span>`);
-                coloredQuery += condParts.join(` <span class="keyword">AND</span> `);
+        
+        let html = '';
+        checked.forEach(tbl => {
+            let q = `SELECT * FROM <span class="table-name">${tbl}</span>`;
+            if (conds.length) {
+                q += ' <span class="keyword">WHERE</span> ';
+                const parts = [];
+                if (dc !== null) parts.push(`<span class="string">dist_code</span> <span class="operator">=</span> <span class="number">${dc}</span>`);
+                if (tc !== null) parts.push(`<span class="string">taluk_code</span> <span class="operator">=</span> <span class="number">${tc}</span>`);
+                if (hc !== null) parts.push(`<span class="string">hobli_code</span> <span class="operator">=</span> <span class="number">${hc}</span>`);
+                if (vc !== null) parts.push(`<span class="string">village_code</span> <span class="operator">=</span> <span class="number">${vc}</span>`);
+                if (appl) parts.push(`<span class="string">appl_no</span> <span class="operator">=</span> <span class="string">'${appl}'</span>`);
+                if (tran) parts.push(`<span class="string">tran_no</span> <span class="operator">=</span> <span class="string">'${tran}'</span>`);
+                if (year) parts.push(`<span class="string">year_code</span> <span class="operator">=</span> <span class="string">'${year}'</span>`);
+                q += parts.join(` <span class="keyword">AND</span> `);
             }
-            coloredQuery += ';';
-
-            queriesHTML += `
-                        <div class="query-item">
-                            <div class="sql-text">${coloredQuery}</div>
-                        </div>
-                    `;
+            q += ';';
+            html += `<div class="query-item"><div class="sql-text">${q}</div></div>`;
         });
-
-        queryGrid.innerHTML = queriesHTML;
-        queryCount.textContent = checkedTables.length;
+        queryGrid.innerHTML = html;
+        queryCount.textContent = checked.length;
     }
 
-    // ===== Copy All =====
     function copyAllQueries() {
-        const queryItems = document.querySelectorAll('.query-item');
-        if (queryItems.length === 0) {
-            alert('No queries to copy!');
-            return;
-        }
-
-        let allQueries = '';
-        queryItems.forEach((item) => {
-            const sqlText = item.querySelector('.sql-text');
-            if (sqlText) {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = sqlText.innerHTML;
-                const plainText = tempDiv.textContent || tempDiv.innerText;
-                allQueries += plainText + '\n\n';
-            }
-        });
-
-        navigator.clipboard.writeText(allQueries.trim()).then(() => {
-            copyAllBtn.textContent = '✅ Copied!';
-            copyAllBtn.classList.add('copied');
-            setTimeout(() => {
-                copyAllBtn.textContent = '📋 Copy All';
-                copyAllBtn.classList.remove('copied');
-            }, 2000);
+        const items = document.querySelectorAll('.query-item .sql-text');
+        if (!items.length) { alert('No queries to copy!'); return; }
+        let all = '';
+        items.forEach(el => { const d = document.createElement('div'); d.innerHTML = el.innerHTML; all += (d.textContent||d.innerText) + '\n\n'; });
+        navigator.clipboard.writeText(all.trim()).then(() => {
+            copyAllBtn.textContent = '✅ Copied!'; copyAllBtn.classList.add('copied');
+            setTimeout(() => { copyAllBtn.textContent = '📋 Copy All'; copyAllBtn.classList.remove('copied'); }, 2000);
         }).catch(() => {
-            const textarea = document.createElement('textarea');
-            textarea.value = allQueries.trim();
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
+            const ta = document.createElement('textarea'); ta.value = all.trim(); document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
             copyAllBtn.textContent = '✅ Copied!';
-            setTimeout(() => {
-                copyAllBtn.textContent = '📋 Copy All';
-            }, 2000);
+            setTimeout(() => { copyAllBtn.textContent = '📋 Copy All'; }, 2000);
         });
     }
 
-    function handleSubmit() {
-        generateQueries();
-        applyFilters();
-    }
+    function handleSubmit() { generateQueries(); applyFilters(); }
 
-    // ===== Event Listeners =====
+    // events
     districtSelect.addEventListener('change', populateTaluks);
     talukSelect.addEventListener('change', populateHoblis);
     hobliSelect.addEventListener('change', populateVillages);
@@ -1821,7 +1611,7 @@
     submitBtn.addEventListener('click', handleSubmit);
     copyAllBtn.addEventListener('click', copyAllQueries);
 
-    // ===== INIT =====
+    // init
     populateDistricts();
     populateTaluks();
     totalCount.textContent = rawRows.length;
